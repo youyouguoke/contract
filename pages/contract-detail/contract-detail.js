@@ -152,6 +152,26 @@ Page({
     wx.navigateTo({ url: `/pages/create-contract/create-contract?templateId=${contract.templateId}&contractId=${id}` });
   },
 
+  deleteContract() {
+    wx.showModal({
+      title: '确认删除',
+      content: '删除后无法恢复，确认删除此草稿？',
+      confirmColor: '#FA3534',
+      success: async (res) => {
+        if (res.confirm) {
+          try {
+            const id = this.data.contract._id || this.data.contract.id;
+            await require('../../utils/cloud-db').removeContract(id);
+            showToast('已删除');
+            setTimeout(() => wx.navigateBack(), 1500);
+          } catch (e) {
+            showToast('删除失败');
+          }
+        }
+      },
+    });
+  },
+
   shareToSigner() {},
 
   sendContract() {

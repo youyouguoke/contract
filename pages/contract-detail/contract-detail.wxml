@@ -111,6 +111,8 @@
     </view>
     <!-- 草稿 -->
     <view class="flex" wx:if="{{contract.status === 'draft'}}">
+      <button class="btn-outline flex-1" style="color:#FA3534;border-color:#FA3534" bindtap="deleteContract">删除</button>
+      <view style="width:24rpx"></view>
       <button class="btn-outline flex-1" bindtap="editContract">编辑合约</button>
       <view style="width:24rpx"></view>
       <button class="btn-primary flex-1" bindtap="sendContract">发起签约</button>
