@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "drag-marker": "../../../components/drag-marker/drag-marker"
+  },
+  "navigationBarTitleText": "文档标注",
+  "disableScroll": true
+}

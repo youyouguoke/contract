@@ -1,0 +1,313 @@
+.page-doc-preview {
+  background: #EBEEF5;
+  min-height: 100vh;
+  padding-bottom: 260rpx;
+}
+
+/* 文档预览页 */
+
+/* 签署方图例 */
+.signer-legend {
+  padding: 16rpx 24rpx;
+  background: #fff;
+  gap: 20rpx;
+  flex-wrap: wrap;
+}
+
+.legend-title {
+  font-size: 24rpx;
+  color: #909399;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+}
+
+.legend-dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+}
+
+.legend-label {
+  font-size: 24rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+/* 渲染进度条 */
+.render-progress {
+  padding: 12rpx 24rpx;
+  background: #ECF2FF;
+  gap: 12rpx;
+}
+
+.render-spinner {
+  width: 28rpx;
+  height: 28rpx;
+  border: 3rpx solid #EBEEF5;
+  border-top-color: #4F7CFF;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.render-text {
+  font-size: 24rpx;
+  color: #4F7CFF;
+}
+
+/* 页码指示器 */
+.page-indicator {
+  text-align: center;
+  padding: 16rpx 0;
+  font-size: 26rpx;
+  color: #606266;
+  font-weight: 500;
+}
+
+/* 文档区域 */
+.doc-area {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding: 0 12px;
+}
+
+/* 底层：页面背景图/模拟页 */
+.page-bg {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #FFFFFF;
+  box-shadow: 0 2rpx 20rpx rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* 上层：可拖拽标记区域（透明背景） */
+.movable-zone {
+  position: relative;
+  z-index: 2;
+  background: transparent;
+  border-radius: 4px;
+}
+
+/* 文档文本内容（Word 转换后客户端直接渲染） */
+.page-text-content {
+  padding: 24px 20px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.page-text-line {
+  display: block;
+  font-size: 11px;
+  line-height: 18px;
+  color: #262626;
+  word-break: break-all;
+}
+
+/* 模拟页面 */
+.mock-page {
+  padding: 40px 30px;
+  box-sizing: border-box;
+}
+
+/* 真实文档图片 */
+.page-real-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.mock-page-title {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.mock-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mock-line {
+  height: 8px;
+  background: #F0F0F0;
+  border-radius: 4px;
+}
+
+.mock-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-30deg);
+  font-size: 60px;
+  color: rgba(0, 0, 0, 0.04);
+  font-weight: 700;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* 标记 movable-view */
+.marker-mv {
+  position: absolute;
+}
+
+/* 翻页 */
+.page-nav {
+  padding: 16rpx 32rpx;
+}
+
+.nav-btn {
+  font-size: 28rpx;
+  color: #4F7CFF;
+  font-weight: 500;
+  padding: 8rpx 0;
+}
+
+.nav-btn.disabled {
+  color: #C0C4CC;
+}
+
+.nav-dots {
+  gap: 12rpx;
+}
+
+.nav-dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  background: #DCDFE6;
+  transition: all 0.2s;
+}
+
+.nav-dot.active {
+  background: #4F7CFF;
+  width: 32rpx;
+  border-radius: 8rpx;
+}
+
+/* 标记列表 */
+.markers-summary {
+  padding: 0 24rpx;
+  margin-bottom: 16rpx;
+}
+
+.summary-title {
+  font-size: 24rpx;
+  color: #909399;
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+.summary-list {
+  background: #FFFFFF;
+  border-radius: 12rpx;
+  overflow: hidden;
+}
+
+.summary-item {
+  padding: 16rpx 20rpx;
+  border-bottom: 1rpx solid #F5F6FA;
+}
+
+.summary-item:last-child {
+  border-bottom: none;
+}
+
+.summary-item.active {
+  background: #ECF2FF;
+}
+
+.summary-signer-dot {
+  width: 14rpx;
+  height: 14rpx;
+  border-radius: 50%;
+  margin-right: 10rpx;
+  flex-shrink: 0;
+}
+
+.summary-icon {
+  font-size: 24rpx;
+  margin-right: 12rpx;
+}
+
+.summary-label {
+  font-size: 26rpx;
+  color: #333;
+}
+
+.summary-pos {
+  font-size: 22rpx;
+  color: #C0C4CC;
+  font-family: monospace;
+}
+
+/* 工具栏 */
+.toolbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #FFFFFF;
+  box-shadow: 0 -2rpx 12rpx rgba(0, 0, 0, 0.06);
+  z-index: 100;
+  padding: 16rpx 0;
+}
+
+.toolbar-row {
+  padding: 0 24rpx;
+  justify-content: space-around;
+}
+
+.tool-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12rpx 24rpx;
+  border-radius: 12rpx;
+}
+
+.tool-btn:active {
+  background: #F5F6FA;
+}
+
+.tool-btn.save {
+  background: #ECF2FF;
+}
+
+.tool-icon {
+  font-size: 40rpx;
+  margin-bottom: 4rpx;
+}
+
+.tool-label {
+  font-size: 22rpx;
+  color: #606266;
+}
+
+.tool-btn.save .tool-label {
+  color: #4F7CFF;
+  font-weight: 500;
+}
+
+.toolbar-hint {
+  text-align: center;
+  font-size: 20rpx;
+  color: #C0C4CC;
+  margin-top: 8rpx;
+}

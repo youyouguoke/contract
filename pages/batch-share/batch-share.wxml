@@ -1,0 +1,36 @@
+<view class="page-batch-share">
+  <!-- 顶部提示 -->
+  <view class="card tip-card">
+    <text class="tip-title">签约已发起</text>
+    <text class="tip-desc">共 {{contracts.length}} 份合约，请逐一转发给对应签署方</text>
+  </view>
+
+  <!-- 合约列表 -->
+  <view class="contract-list">
+    <view class="share-item card" wx:for="{{contracts}}" wx:key="id">
+      <view class="share-item-header flex items-center justify-between">
+        <view class="flex items-center flex-1">
+          <view class="signer-index">{{index + 1}}</view>
+          <view class="signer-info flex-1">
+            <text class="signer-name">{{item.signerName}}</text>
+            <text class="signer-phone" wx:if="{{item.signerPhone}}">{{item.signerPhone}}</text>
+          </view>
+        </view>
+        <view class="status-tag" style="color:{{item.statusColor}}">{{item.statusText}}</view>
+      </view>
+
+      <view class="share-item-footer flex items-center justify-between">
+        <text class="contract-title-text">{{item.title}}</text>
+        <view class="share-actions flex items-center">
+          <view class="detail-link" bindtap="goDetail" data-id="{{item.id}}">查看</view>
+          <button class="share-btn" open-type="share" data-id="{{item.id}}" data-title="{{item.title}}">转发</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部操作 -->
+  <view class="bottom-bar safe-bottom">
+    <button class="btn-primary" style="width:100%" bindtap="goContracts">完成，查看合约列表</button>
+  </view>
+</view>

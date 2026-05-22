@@ -1,0 +1,167 @@
+:host {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+}
+
+.tab-bar {
+  display: flex;
+  background: #FFFFFF;
+  padding-bottom: env(safe-area-inset-bottom);
+  box-shadow: 0 -1rpx 6rpx rgba(0, 0, 0, 0.05);
+  height: 104rpx;
+}
+
+.tab-bar-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8rpx 0;
+}
+
+.tab-text {
+  font-size: 22rpx;
+  color: #999999;
+  margin-top: 4rpx;
+  transition: color 0.2s;
+}
+
+.tab-text.active {
+  color: #4F7CFF;
+}
+
+/* ===== 图标通用 ===== */
+.icon-wrap {
+  width: 48rpx;
+  height: 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== 首页图标 - 小房子 ===== */
+.icon-home {
+  position: relative;
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.home-roof {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 22rpx solid transparent;
+  border-right: 22rpx solid transparent;
+  border-bottom: 18rpx solid #CCCCCC;
+  transition: border-bottom-color 0.2s;
+}
+
+.icon-home.active .home-roof {
+  border-bottom-color: #4F7CFF;
+}
+
+.home-body {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30rpx;
+  height: 22rpx;
+  border: 3rpx solid #CCCCCC;
+  border-top: none;
+  border-radius: 0 0 4rpx 4rpx;
+  transition: border-color 0.2s;
+}
+
+.icon-home.active .home-body {
+  border-color: #4F7CFF;
+}
+
+/* ===== 合约图标 - 文档 ===== */
+.icon-contract {
+  position: relative;
+  width: 32rpx;
+  height: 40rpx;
+}
+
+.doc-body {
+  width: 100%;
+  height: 100%;
+  border: 3rpx solid #CCCCCC;
+  border-radius: 4rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5rpx;
+  padding: 6rpx;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.icon-contract.active .doc-body {
+  border-color: #4F7CFF;
+}
+
+.doc-line {
+  width: 100%;
+  height: 3rpx;
+  background: #CCCCCC;
+  border-radius: 2rpx;
+  transition: background 0.2s;
+}
+
+.doc-line.short {
+  width: 65%;
+}
+
+.icon-contract.active .doc-line {
+  background: #4F7CFF;
+}
+
+/* ===== 我的图标 - 人物 ===== */
+.icon-profile {
+  position: relative;
+  width: 40rpx;
+  height: 44rpx;
+}
+
+.profile-head {
+  position: absolute;
+  top: 2rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  border: 3rpx solid #CCCCCC;
+  transition: border-color 0.2s;
+}
+
+.icon-profile.active .profile-head {
+  border-color: #4F7CFF;
+}
+
+.profile-body {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32rpx;
+  height: 16rpx;
+  border: 3rpx solid #CCCCCC;
+  border-bottom: none;
+  border-radius: 16rpx 16rpx 0 0;
+  transition: border-color 0.2s;
+}
+
+.icon-profile.active .profile-body {
+  border-color: #4F7CFF;
+}

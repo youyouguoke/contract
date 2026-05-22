@@ -1,0 +1,119 @@
+<view class="page-profile">
+  <!-- 头部用户信息 -->
+  <view class="profile-header">
+    <view class="header-bg">
+      <view class="user-info flex items-center" wx:if="{{isLoggedIn}}" bindtap="showProfileEditor">
+        <view class="avatar-wrap">
+          <image class="avatar-img" wx:if="{{userInfo.avatar}}" src="{{userInfo.avatar}}" mode="aspectFill" />
+          <text class="avatar-text" wx:else>{{avatarText}}</text>
+        </view>
+        <view class="user-detail flex-1">
+          <text class="user-name">{{userInfo.name}}</text>
+        </view>
+      </view>
+      <view class="login-prompt flex items-center" wx:else bindtap="goLogin">
+        <view class="avatar-wrap">
+          <text class="avatar-text">?</text>
+        </view>
+        <view class="flex-1">
+          <text class="login-text">点击登录</text>
+          <text class="login-desc">登录后享受完整签约服务</text>
+        </view>
+        <text class="login-arrow">›</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 编辑资料弹窗 -->
+  <view class="profile-mask" wx:if="{{showEditor}}" bindtap="hideProfileEditor"></view>
+  <view class="profile-editor {{showEditor ? 'show' : ''}}">
+    <view class="editor-header flex items-center justify-between">
+      <text class="editor-title">编辑资料</text>
+      <text class="editor-close" bindtap="hideProfileEditor">✕</text>
+    </view>
+    <view class="editor-avatar-section flex flex-col items-center" bindtap="chooseAvatar">
+      <view class="editor-avatar-wrap">
+        <image class="editor-avatar-img" wx:if="{{editAvatar}}" src="{{editAvatar}}" mode="aspectFill" />
+        <text class="editor-avatar-text" wx:else>{{avatarText}}</text>
+      </view>
+      <text class="editor-avatar-hint">点击更换头像</text>
+    </view>
+    <view class="editor-nick-section">
+      <text class="editor-nick-label">昵称</text>
+      <input class="editor-nick-input" placeholder="请输入昵称" value="{{editNickName}}" bindinput="onEditNickInput" maxlength="20" />
+    </view>
+    <button class="btn-primary editor-save-btn" bindtap="saveProfile">保存</button>
+  </view>
+
+  <!-- 统计 -->
+  <view class="stats-bar card flex justify-between" wx:if="{{isLoggedIn}}">
+    <view class="stat-item flex flex-col items-center flex-1">
+      <text class="stat-num">{{stats.initiated}}</text>
+      <text class="stat-label">我发起的</text>
+    </view>
+    <view class="stat-item flex flex-col items-center flex-1">
+      <text class="stat-num">{{stats.received}}</text>
+      <text class="stat-label">我收到的</text>
+    </view>
+    <view class="stat-item flex flex-col items-center flex-1">
+      <text class="stat-num">{{stats.completed}}</text>
+      <text class="stat-label">已完成</text>
+    </view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="menu-group card">
+    <view class="menu-item flex items-center" bindtap="goPage" data-url="/pages/contracts/contracts">
+      <text class="menu-icon">📋</text>
+      <text class="menu-text flex-1">我的合约</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item flex items-center" bindtap="goPage" data-url="/pages/templates/templates">
+      <text class="menu-icon">📄</text>
+      <text class="menu-text flex-1">合约模板</text>
+      <text class="menu-arrow">›</text>
+    </view>
+  </view>
+
+  <!-- 签署凭证管理 -->
+  <view class="menu-group card">
+    <view class="menu-item flex items-center" bindtap="goPage" data-url="/pages/signature-manage/signature-manage">
+      <text class="menu-icon">✍️</text>
+      <text class="menu-text flex-1">我的签名</text>
+      <text class="menu-badge" wx:if="{{signatureCount === 0}}">未设置</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item flex items-center" bindtap="goPage" data-url="/pages/stamp-manage/stamp-manage">
+      <text class="menu-icon">🔴</text>
+      <text class="menu-text flex-1">我的印章</text>
+      <text class="menu-badge" wx:if="{{stampCount === 0}}">未设置</text>
+      <text class="menu-arrow">›</text>
+    </view>
+  </view>
+
+  <view class="menu-group card">
+    <view class="menu-item flex items-center">
+      <text class="menu-icon">🔔</text>
+      <text class="menu-text flex-1">消息通知</text>
+      <text class="menu-arrow">›</text>
+    </view>
+  </view>
+
+  <view class="menu-group card">
+    <button class="menu-item menu-item-btn flex items-center" open-type="contact">
+      <text class="menu-icon">💬</text>
+      <text class="menu-text flex-1">在线客服</text>
+      <text class="menu-arrow">›</text>
+    </button>
+    <view class="menu-item flex items-center" bindtap="showAbout">
+      <text class="menu-icon">ℹ️</text>
+      <text class="menu-text flex-1">关于我们</text>
+      <text class="menu-arrow">›</text>
+    </view>
+  </view>
+
+  <!-- 退出登录 -->
+  <view class="logout-section" wx:if="{{isLoggedIn}}">
+    <button class="logout-btn" bindtap="logout">退出登录</button>
+  </view>
+</view>

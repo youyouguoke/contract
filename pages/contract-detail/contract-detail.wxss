@@ -1,0 +1,219 @@
+.page-detail {
+  padding-bottom: 200rpx;
+}
+
+/* 分享来源提示 */
+.share-banner {
+  background: #ECF2FF;
+  padding: 20rpx 32rpx;
+  text-align: center;
+}
+
+.share-banner-text {
+  font-size: 28rpx;
+  color: #4F7CFF;
+  font-weight: 500;
+}
+
+/* 状态头部 */
+.status-header {
+  padding: 48rpx 32rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.status-icon-wrap {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16rpx;
+}
+
+.status-icon-text {
+  font-size: 44rpx;
+  color: #FFFFFF;
+}
+
+.status-text {
+  font-size: 34rpx;
+  font-weight: 700;
+  margin-bottom: 8rpx;
+}
+
+.status-desc {
+  font-size: 26rpx;
+  color: #909399;
+}
+
+/* 卡片 */
+.card {
+  margin: 24rpx;
+}
+
+.card-section-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 24rpx;
+}
+
+.detail-row {
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #F5F6FA;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  font-size: 28rpx;
+  color: #909399;
+  width: 160rpx;
+}
+
+.detail-value {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.detail-value-wrap {
+  word-break: break-all;
+  white-space: pre-wrap;
+}
+
+/* 签署方 */
+.signer-list {
+  margin-top: 8rpx;
+}
+
+.signer-item {
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #F5F6FA;
+}
+
+.signer-item:last-child {
+  border-bottom: none;
+}
+
+.signer-avatar-wrap {
+  position: relative;
+  margin-right: 20rpx;
+}
+
+.signer-avatar {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  background: #E8E8E8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  color: #666;
+}
+
+.signer-avatar.signed {
+  background: #E8F8EF;
+  color: #19BE6B;
+}
+
+.signer-status-dot {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  border: 3rpx solid #FFFFFF;
+}
+
+.signer-detail {
+  display: flex;
+  flex-direction: column;
+}
+
+.signer-name {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+.signer-status {
+  font-size: 24rpx;
+}
+
+.signer-phone {
+  font-size: 24rpx;
+  color: #909399;
+  margin-top: 4rpx;
+}
+
+.signer-time {
+  font-size: 22rpx;
+  color: #C0C4CC;
+  margin-top: 4rpx;
+}
+
+.signer-id-info {
+  font-size: 22rpx;
+  color: #909399;
+  margin-top: 4rpx;
+  display: block;
+}
+
+.empty-signers {
+  text-align: center;
+  color: #C0C4CC;
+  font-size: 26rpx;
+  padding: 32rpx 0;
+}
+
+/* 下载区域 */
+.download-row {
+  padding: 24rpx 0;
+  border-top: 1rpx solid #F5F6FA;
+}
+
+.download-icon {
+  font-size: 48rpx;
+  margin-right: 20rpx;
+}
+
+.download-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.download-title {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+.download-desc {
+  font-size: 24rpx;
+  color: #909399;
+  margin-top: 4rpx;
+}
+
+.download-arrow {
+  font-size: 36rpx;
+  color: #C0C4CC;
+}
+
+/* 底部操作栏 */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #FFFFFF;
+  padding: 16rpx 32rpx;
+  box-shadow: 0 -2rpx 12rpx rgba(0, 0, 0, 0.06);
+  z-index: 100;
+}

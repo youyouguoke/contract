@@ -1,0 +1,127 @@
+<view class="page-templates">
+  <!-- 搜索 -->
+  <view class="search-bar">
+    <view class="search-input-wrap flex items-center">
+      <text class="search-icon">🔍</text>
+      <input class="search-input" placeholder="搜索合约模板" bindinput="onSearchInput" value="{{keyword}}" />
+    </view>
+  </view>
+
+  <!-- 分类筛选 -->
+  <scroll-view class="category-bar" scroll-x="true" enhanced="true" show-scrollbar="{{false}}">
+    <view class="category-inner flex">
+      <view
+        wx:for="{{categories}}"
+        wx:key="*this"
+        class="category-tag {{currentCategory === item ? 'active' : ''}}"
+        bindtap="onCategoryTap"
+        data-value="{{item}}"
+      >
+        {{item}}
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 操作入口 -->
+  <view class="container entry-row flex">
+    <view class="entry-card card flex-1" bindtap="toggleCreator">
+      <text class="entry-icon">✏️</text>
+      <text class="entry-text">自建模板</text>
+    </view>
+    <view class="entry-card card flex-1 upload" bindtap="onUploadTap">
+      <text class="entry-icon">📤</text>
+      <text class="entry-text">上传文档</text>
+    </view>
+  </view>
+
+  <!-- 自建模板面板 -->
+  <view class="creator-panel card container" wx:if="{{showCreator}}">
+    <view class="flex items-center justify-between mb-20">
+      <text class="creator-title">创建自定义模板</text>
+      <text class="creator-close" bindtap="toggleCreator">✕</text>
+    </view>
+
+    <!-- 模板名 -->
+    <view class="creator-field">
+      <text class="creator-label">模板名称</text>
+      <input class="creator-input" placeholder="如：合作协议" value="{{newTplName}}" bindinput="onNewTplName" maxlength="20" />
+    </view>
+
+    <!-- 分类选择 -->
+    <view class="creator-field">
+      <text class="creator-label">分类</text>
+      <view class="cat-options flex flex-wrap">
+        <view
+          wx:for="{{allCategories}}"
+          wx:key="id"
+          class="cat-chip {{newTplCategory === item.name ? 'active' : ''}}"
+          bindtap="onSelectCategory"
+          data-name="{{item.name}}"
+        >
+          <text>{{item.icon}} {{item.name}}</text>
+        </view>
+        <view class="cat-chip new" bindtap="onSelectCategory" data-name="__new__">+ 新分类</view>
+      </view>
+      <!-- 新建分类输入 -->
+      <view class="new-cat-row flex items-center" wx:if="{{showNewCatInput}}">
+        <input class="creator-input flex-1" placeholder="输入新分类名" value="{{newCatInput}}" bindinput="onNewCatInput" maxlength="6" bindconfirm="confirmNewCategory" />
+        <text class="new-cat-ok" bindtap="confirmNewCategory">确定</text>
+      </view>
+    </view>
+
+    <!-- 说明（选填） -->
+    <view class="creator-field">
+      <text class="creator-label">说明（选填）</text>
+      <input class="creator-input" placeholder="简要描述模板用途" value="{{newTplDesc}}" bindinput="onNewTplDesc" maxlength="30" />
+    </view>
+
+    <!-- 自定义字段 -->
+    <view class="creator-field">
+      <text class="creator-label">合约字段</text>
+      <view class="field-chips" wx:if="{{newTplFields.length > 0}}">
+        <view class="field-chip flex items-center" wx:for="{{newTplFields}}" wx:key="*this">
+          <text class="field-chip-text">{{item}}</text>
+          <text class="field-chip-del" catchtap="removeField" data-index="{{index}}">✕</text>
+        </view>
+      </view>
+      <view class="field-tip" wx:if="{{newTplFields.length === 0}}">未添加字段时将默认含甲方名称、乙方名称</view>
+      <view class="new-field-row flex items-center">
+        <input class="creator-input flex-1" placeholder="输入字段名，如：合约金额" value="{{newFieldInput}}" bindinput="onNewFieldInput" bindconfirm="addField" maxlength="15" />
+        <text class="new-field-add" bindtap="addField">+ 添加</text>
+      </view>
+    </view>
+
+    <view class="creator-btn" bindtap="saveCustomTemplate">保存模板</view>
+  </view>
+
+  <!-- 模板列表 -->
+  <view class="template-list container">
+    <view
+      wx:for="{{filteredTemplates}}"
+      wx:key="id"
+      class="template-card card"
+      bindtap="onTemplateTap"
+      data-id="{{item.id}}"
+      data-type="{{item.templateType || 'field'}}"
+    >
+      <view class="flex items-center">
+        <view class="template-icon">
+          <text>{{item.icon}}</text>
+        </view>
+        <view class="template-info flex-1">
+          <view class="flex items-center">
+            <text class="template-name">{{item.name}}</text>
+            <text class="tpl-type-badge doc" wx:if="{{item.templateType === 'document'}}">文档</text>
+            <text class="tpl-type-badge custom" wx:if="{{item.source === 'custom' && item.templateType === 'field'}}">自建</text>
+          </view>
+          <text class="template-category">{{item.category}}</text>
+        </view>
+        <text class="template-del" wx:if="{{item.source === 'custom' && item.templateType === 'field'}}" catchtap="deleteTemplate" data-id="{{item.id}}">🗑️</text>
+        <text class="template-arrow">›</text>
+      </view>
+      <text class="template-desc">{{item.description}}</text>
+    </view>
+
+    <empty-state wx:if="{{filteredTemplates.length === 0}}" text="未找到相关模板" />
+  </view>
+</view>

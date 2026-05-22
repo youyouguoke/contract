@@ -1,0 +1,477 @@
+.page-create {
+  padding: 24rpx;
+  padding-bottom: 200rpx;
+}
+
+.template-info-card {
+  display: flex;
+  align-items: center;
+}
+
+.tpl-icon {
+  font-size: 48rpx;
+  margin-right: 20rpx;
+}
+
+.tpl-name {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.tpl-desc {
+  font-size: 24rpx;
+  color: #909399;
+  margin-top: 4rpx;
+}
+
+.section-card {
+  margin-bottom: 24rpx;
+}
+
+.field-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.field-group {
+  margin-bottom: 20rpx;
+}
+
+.field-label {
+  font-size: 26rpx;
+  color: #606266;
+  margin-bottom: 8rpx;
+  display: block;
+}
+
+.field-input {
+  border: 1rpx solid #DCDFE6;
+  border-radius: 8rpx;
+  padding: 16rpx 20rpx;
+  font-size: 28rpx;
+  color: #333;
+  background: #FAFAFA;
+}
+
+.field-textarea {
+  border: 1rpx solid #DCDFE6;
+  border-radius: 8rpx;
+  padding: 16rpx 20rpx;
+  font-size: 28rpx;
+  color: #333;
+  background: #FAFAFA;
+  width: 100%;
+  min-height: 200rpx;
+  line-height: 1.6;
+  box-sizing: border-box;
+}
+
+.add-btn {
+  font-size: 28rpx;
+  font-weight: 500;
+}
+
+.empty-tip {
+  text-align: center;
+  color: #C0C4CC;
+  font-size: 26rpx;
+  padding: 32rpx 0;
+}
+
+.signer-item {
+  background: #FAFAFA;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  margin-bottom: 16rpx;
+}
+
+.signer-row {
+  margin-bottom: 12rpx;
+}
+
+.signer-row:last-child {
+  margin-bottom: 0;
+}
+
+.signer-label {
+  font-size: 26rpx;
+  color: #909399;
+  width: 120rpx;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.signer-input {
+  flex: 1;
+  border-bottom: 1rpx solid #EBEEF5;
+  font-size: 28rpx;
+  padding: 8rpx 0;
+}
+
+.signer-del {
+  font-size: 32rpx;
+  color: #C0C4CC;
+  padding: 16rpx;
+  margin-left: 12rpx;
+}
+
+.picker-value {
+  border: 1rpx solid #DCDFE6;
+  border-radius: 8rpx;
+  padding: 16rpx 20rpx;
+  font-size: 28rpx;
+  color: #333;
+  background: #FAFAFA;
+}
+
+.picker-value.placeholder {
+  color: #C0C4CC;
+}
+
+/* 底部操作栏 */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #FFFFFF;
+  padding: 16rpx 32rpx;
+  box-shadow: 0 -2rpx 12rpx rgba(0, 0, 0, 0.06);
+  z-index: 100;
+}
+
+/* 分类选择 */
+.category-select {
+  gap: 16rpx;
+}
+
+.cat-option {
+  display: flex;
+  align-items: center;
+  padding: 12rpx 24rpx;
+  background: #F5F6FA;
+  border-radius: 12rpx;
+  font-size: 26rpx;
+  color: #606266;
+  border: 1rpx solid transparent;
+  transition: all 0.2s;
+}
+
+.cat-option.selected {
+  background: #ECF2FF;
+  color: #4F7CFF;
+  border-color: #4F7CFF;
+  font-weight: 500;
+}
+
+.cat-icon {
+  font-size: 28rpx;
+  margin-right: 6rpx;
+}
+
+/* 标签选择 */
+.tag-select {
+  gap: 12rpx;
+}
+
+.tag-option {
+  font-size: 24rpx;
+  color: #606266;
+  background: #F5F6FA;
+  padding: 8rpx 20rpx;
+  border-radius: 24rpx;
+  border: 1rpx solid transparent;
+  transition: all 0.2s;
+}
+
+.tag-option.selected {
+  font-weight: 500;
+}
+
+/* 自定义标签输入 */
+.custom-tag-row {
+  gap: 12rpx;
+}
+
+.custom-tag-input {
+  border: 1rpx solid #DCDFE6;
+  border-radius: 8rpx;
+  padding: 12rpx 16rpx;
+  font-size: 26rpx;
+  background: #FAFAFA;
+  height: 60rpx;
+}
+
+.custom-tag-add {
+  font-size: 26rpx;
+  color: #4F7CFF;
+  font-weight: 500;
+  white-space: nowrap;
+  padding: 12rpx 8rpx;
+}
+
+/* 文档模板信息 */
+.doc-info-row {
+  padding: 14rpx 0;
+  border-bottom: 1rpx solid #F5F6FA;
+}
+
+.doc-info-row:last-of-type {
+  border-bottom: none;
+}
+
+.doc-info-label {
+  font-size: 28rpx;
+  color: #909399;
+  width: 120rpx;
+}
+
+.doc-info-value {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.edit-markers-btn {
+  margin-top: 20rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #4F7CFF;
+  font-weight: 500;
+  padding: 16rpx;
+  background: #ECF2FF;
+  border-radius: 8rpx;
+}
+
+/* 角色选择 */
+.role-switch {
+  gap: 16rpx;
+  margin-bottom: 12rpx;
+}
+
+.role-current {
+  gap: 8rpx;
+  background: #F5F6FA;
+  padding: 16rpx 24rpx;
+  border-radius: 12rpx;
+}
+
+.role-dot {
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+}
+
+.role-current-label {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.role-option {
+  font-size: 26rpx;
+  color: #4F7CFF;
+  padding: 12rpx 20rpx;
+  border: 1rpx solid #4F7CFF;
+  border-radius: 8rpx;
+  background: #ECF2FF;
+}
+
+.role-hint {
+  font-size: 24rpx;
+  color: #909399;
+}
+
+.role-tag {
+  font-size: 22rpx;
+  padding: 2rpx 10rpx;
+  border-radius: 6rpx;
+  margin-left: 8rpx;
+  font-weight: 400;
+}
+
+/* 签署凭证 */
+.credential-row {
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #F5F6FA;
+}
+
+.credential-name-input {
+  font-size: 28rpx;
+  color: #333;
+  padding: 8rpx 0;
+  border-bottom: 1rpx solid #EBEEF5;
+}
+
+.credential-row:last-of-type {
+  border-bottom: none;
+}
+
+.credential-label {
+  font-size: 28rpx;
+  color: #606266;
+  width: 140rpx;
+}
+
+.credential-value {
+  gap: 12rpx;
+}
+
+.credential-value.placeholder text {
+  color: #C0C4CC;
+  font-size: 28rpx;
+}
+
+.credential-change {
+  font-size: 24rpx;
+  color: #4F7CFF;
+}
+
+.credential-arrow {
+  font-size: 28rpx;
+  color: #C0C4CC;
+  margin-left: 8rpx;
+}
+
+.sig-thumb {
+  width: 160rpx;
+  height: 60rpx;
+  border: 1rpx solid #EBEEF5;
+  border-radius: 6rpx;
+}
+
+.credential-sig-name {
+  font-size: 24rpx;
+  color: #606266;
+}
+
+.stamp-thumb-ring {
+  width: 60rpx;
+  height: 60rpx;
+  border: 3rpx solid #D32F2F;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8;
+}
+
+.stamp-thumb-img {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 6rpx;
+}
+
+.stamp-thumb-text {
+  font-size: 12rpx;
+  color: #D32F2F;
+  font-weight: 600;
+  text-align: center;
+  overflow: hidden;
+  padding: 2rpx;
+  line-height: 1.1;
+  word-break: break-all;
+}
+
+.credential-hint {
+  font-size: 22rpx;
+  color: #909399;
+  margin-top: 12rpx;
+}
+
+/* 签署方填写模式 */
+.signer-index-label {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.fill-mode-switch {
+  background: #F5F6FA;
+  border-radius: 8rpx;
+  padding: 4rpx;
+  gap: 0;
+}
+
+.fill-mode-option {
+  flex: 1;
+  text-align: center;
+  font-size: 26rpx;
+  color: #909399;
+  padding: 12rpx 0;
+  border-radius: 6rpx;
+  transition: all 0.2s;
+}
+
+.fill-mode-option.active {
+  background: #FFFFFF;
+  color: #4F7CFF;
+  font-weight: 500;
+  box-shadow: 0 1rpx 4rpx rgba(0, 0, 0, 0.08);
+}
+
+.signer-self-fill-hint {
+  padding: 24rpx 16rpx;
+  text-align: center;
+}
+
+.signer-self-fill-hint .hint-text {
+  font-size: 26rpx;
+  color: #909399;
+}
+
+/* 份数选择 */
+.copies-row {
+  gap: 12rpx;
+  justify-content: center;
+}
+
+.copies-label {
+  font-size: 26rpx;
+  color: #606266;
+}
+
+.copies-ctrl {
+  gap: 0;
+  border: 1rpx solid #DCDFE6;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+
+.copies-btn {
+  width: 56rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #4F7CFF;
+  background: #F5F6FA;
+}
+
+.copies-num {
+  width: 60rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #333;
+  background: #FFF;
+}
+
+.copies-tip {
+  font-size: 22rpx;
+  color: #C0C4CC;
+}
+
+.picker-text {
+  flex: 1;
+  font-size: 28rpx;
+  padding: 8rpx 0;
+  color: #333;
+}
+
+.picker-text.placeholder {
+  color: #C0C4CC;
+}

@@ -1,0 +1,8 @@
+<view class="marker marker-{{type}} {{selected ? 'marker-selected' : ''}}" bindtap="onTap"
+  style="{{signerColor ? 'border-color:' + signerColor + ';' : ''}}">
+  <text class="marker-signer" wx:if="{{signerLabel}}"
+    style="background:{{signerColor || '#999'}};color:#fff;">{{signerLabel}}</text>
+  <text class="marker-icon">{{typeIcon}}</text>
+  <text class="marker-label" style="{{signerColor ? 'color:' + signerColor : ''}}">{{label}}</text>
+  <view class="marker-delete" wx:if="{{selected}}" catchtap="onDelete">✕</view>
+</view>

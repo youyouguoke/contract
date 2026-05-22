@@ -1,0 +1,9 @@
+{
+  "name": "contract-api",
+  "version": "1.0.0",
+  "description": "Contract query and update API (admin privilege)",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

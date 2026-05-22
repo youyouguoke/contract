@@ -1,0 +1,39 @@
+<view class="tab-bar">
+  <view
+    wx:for="{{list}}"
+    wx:key="index"
+    class="tab-bar-item"
+    data-path="{{item.pagePath}}"
+    data-index="{{index}}"
+    bindtap="switchTab"
+  >
+    <!-- 首页图标 -->
+    <view class="icon-wrap" wx:if="{{index === 0}}">
+      <view class="icon icon-home {{selected === index ? 'active' : ''}}">
+        <view class="home-body"></view>
+        <view class="home-roof"></view>
+      </view>
+    </view>
+
+    <!-- 合约图标 -->
+    <view class="icon-wrap" wx:elif="{{index === 1}}">
+      <view class="icon icon-contract {{selected === index ? 'active' : ''}}">
+        <view class="doc-body">
+          <view class="doc-line"></view>
+          <view class="doc-line short"></view>
+          <view class="doc-line"></view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 我的图标 -->
+    <view class="icon-wrap" wx:elif="{{index === 2}}">
+      <view class="icon icon-profile {{selected === index ? 'active' : ''}}">
+        <view class="profile-head"></view>
+        <view class="profile-body"></view>
+      </view>
+    </view>
+
+    <text class="tab-text {{selected === index ? 'active' : ''}}">{{item.text}}</text>
+  </view>
+</view>

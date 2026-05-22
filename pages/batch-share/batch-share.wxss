@@ -1,0 +1,125 @@
+.page-batch-share {
+  padding: 24rpx;
+  padding-bottom: 200rpx;
+}
+
+.tip-card {
+  text-align: center;
+  background: linear-gradient(135deg, #4F7CFF 0%, #6C8EFF 100%);
+  color: #FFFFFF;
+}
+
+.tip-title {
+  display: block;
+  font-size: 36rpx;
+  font-weight: 700;
+  margin-bottom: 8rpx;
+}
+
+.tip-desc {
+  font-size: 26rpx;
+  opacity: 0.85;
+}
+
+.contract-list {
+  margin-top: 8rpx;
+}
+
+.share-item {
+  padding: 28rpx;
+}
+
+.share-item-header {
+  margin-bottom: 20rpx;
+}
+
+.signer-index {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  background: #ECF2FF;
+  color: #4F7CFF;
+  font-size: 26rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+.signer-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.signer-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.signer-phone {
+  font-size: 24rpx;
+  color: #909399;
+  margin-top: 4rpx;
+}
+
+.status-tag {
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+.share-item-footer {
+  padding-top: 20rpx;
+  border-top: 1rpx solid #F5F6FA;
+}
+
+.contract-title-text {
+  font-size: 26rpx;
+  color: #909399;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.share-actions {
+  gap: 16rpx;
+  flex-shrink: 0;
+  margin-left: 16rpx;
+}
+
+.detail-link {
+  font-size: 26rpx;
+  color: #909399;
+  padding: 8rpx 16rpx;
+}
+
+.share-btn {
+  font-size: 26rpx;
+  color: #FFFFFF;
+  background: #4F7CFF;
+  border: none;
+  border-radius: 8rpx;
+  padding: 0 28rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  margin: 0;
+}
+
+.share-btn::after {
+  border: none;
+}
+
+/* 底部操作栏 */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #FFFFFF;
+  padding: 16rpx 32rpx;
+  box-shadow: 0 -2rpx 12rpx rgba(0, 0, 0, 0.06);
+  z-index: 100;
+}

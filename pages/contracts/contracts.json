@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "contract-card": "../../components/contract-card/contract-card",
+    "empty-state": "../../components/empty-state/empty-state",
+    "tag-filter": "../../components/tag-filter/tag-filter"
+  },
+  "navigationBarTitleText": "我的合约",
+  "enableShareTimeline": true,
+  "enableShareAppMessage": true
+}

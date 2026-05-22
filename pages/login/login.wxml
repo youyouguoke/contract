@@ -1,0 +1,21 @@
+<view class="page-login">
+  <view class="login-header">
+    <view class="logo-wrap">
+      <text class="logo-text">墨舟秒签</text>
+    </view>
+    <text class="login-subtitle">高效便捷的电子签约平台</text>
+  </view>
+
+  <view class="login-body">
+    <button class="btn-primary wx-login-btn" bindtap="wxLogin">
+      微信快捷登录
+    </button>
+
+    <view class="agreement-section flex items-center justify-center">
+      <text class="agreement-text">登录即表示同意</text>
+      <text class="agreement-link primary-color">《用户协议》</text>
+      <text class="agreement-text">和</text>
+      <text class="agreement-link primary-color">《隐私政策》</text>
+    </view>
+  </view>
+</view>

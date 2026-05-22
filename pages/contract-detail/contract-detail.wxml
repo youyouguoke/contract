@@ -1,0 +1,138 @@
+<view class="page-detail">
+  <!-- 分享来源提示 -->
+  <view class="share-banner" wx:if="{{fromShare}}">
+    <text class="share-banner-text">您收到一份签约邀请，请查看后签署</text>
+  </view>
+
+  <!-- 状态区 -->
+  <view class="status-header" style="background:{{statusInfo.bg}}">
+    <view class="status-icon-wrap" style="background:{{statusInfo.color}}">
+      <text class="status-icon-text">{{statusIcon}}</text>
+    </view>
+    <text class="status-text" style="color:{{statusInfo.color}}">{{statusInfo.text}}</text>
+    <text class="status-desc">{{statusDesc}}</text>
+  </view>
+
+  <!-- 合约信息 -->
+  <view class="card">
+    <view class="card-section-title">合约信息</view>
+    <view class="detail-row flex">
+      <text class="detail-label">合约标题</text>
+      <text class="detail-value flex-1">{{contract.title}}</text>
+    </view>
+    <view class="detail-row flex">
+      <text class="detail-label">合约模板</text>
+      <text class="detail-value flex-1">{{contract.templateName}}</text>
+    </view>
+    <view class="detail-row flex">
+      <text class="detail-label">发起方</text>
+      <text class="detail-value flex-1">{{contract.initiator.name}}</text>
+    </view>
+    <view class="detail-row flex">
+      <text class="detail-label">创建时间</text>
+      <text class="detail-value flex-1">{{createdTime}}</text>
+    </view>
+    <view class="detail-row flex" wx:if="{{contract.deadline}}">
+      <text class="detail-label">签署截止</text>
+      <text class="detail-value flex-1">{{contract.deadline}}</text>
+    </view>
+  </view>
+
+  <!-- 合约内容（非文档模板） -->
+  <view class="card" wx:if="{{!contract.isDocumentTemplate && contractFields.length > 0}}">
+    <view class="card-section-title">合约内容</view>
+    <view class="detail-row flex" wx:if="{{partyAName}}">
+      <text class="detail-label">甲方名称</text>
+      <text class="detail-value flex-1">{{partyAName}}</text>
+    </view>
+    <view class="detail-row flex" wx:if="{{partyBName}}">
+      <text class="detail-label">乙方名称</text>
+      <text class="detail-value flex-1">{{partyBName}}</text>
+    </view>
+    <view class="detail-row flex" wx:for="{{contractFields}}" wx:key="label">
+      <text class="detail-label">{{item.label}}</text>
+      <text class="detail-value detail-value-wrap flex-1">{{item.value || '-'}}</text>
+    </view>
+  </view>
+
+  <!-- 下载签署文件 -->
+  <view class="card" wx:if="{{canDownload}}">
+    <view class="download-row flex items-center justify-between" bindtap="downloadPDF">
+      <view class="flex items-center">
+        <text class="download-icon">📥</text>
+        <view class="download-info">
+          <text class="download-title">下载签署文件(PDF)</text>
+          <text class="download-desc">{{contract.status === 'completed' ? '包含所有签署方签名' : '包含已完成的签名'}}</text>
+        </view>
+      </view>
+      <text class="download-arrow">›</text>
+    </view>
+  </view>
+
+  <!-- 签署进度 -->
+  <view class="card">
+    <view class="card-section-title">签署进度</view>
+    <view class="signer-list">
+      <view class="signer-item flex items-center" wx:for="{{contract.signers}}" wx:key="index">
+        <view class="signer-avatar-wrap">
+          <view class="signer-avatar {{item.status === 'signed' ? 'signed' : ''}}">
+            <text>{{item.name[0] || '?'}}</text>
+          </view>
+          <view class="signer-status-dot" style="background:{{item.status === 'signed' ? '#19BE6B' : '#E6A23C'}}"></view>
+        </view>
+        <view class="signer-detail flex-1">
+          <view class="flex items-center justify-between">
+            <text class="signer-name">{{item.name || '待对方填写'}}</text>
+            <text class="signer-status" style="color:{{item.status === 'signed' ? '#19BE6B' : '#E6A23C'}}">
+              {{item.status === 'signed' ? '已签署' : '待签署'}}
+            </text>
+          </view>
+          <text class="signer-phone" wx:if="{{item.phone}}">{{item.phone}}</text>
+          <text class="signer-phone" wx:if="{{!item.phone && item.fillMode === 'signer'}}" style="color:#E6A23C;font-size:22rpx;">对方签署时填写</text>
+          <text class="signer-id-info" wx:if="{{item.idType}}">{{item.idType}}：{{item.idNumber || '-'}}</text>
+          <text class="signer-time" wx:if="{{item.signedAt}}">签署时间：{{item.signedAt}}</text>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{contract.signers.length === 0}}" class="empty-signers">暂无签署方</view>
+  </view>
+
+  <!-- 底部操作 -->
+  <view class="bottom-bar safe-bottom" wx:if="{{showActions}}">
+    <!-- 发起方：pending 状态 → 撤回 + 转发 -->
+    <view class="flex" wx:if="{{contract.status === 'pending' && isInitiator}}">
+      <button class="btn-outline flex-1" bindtap="revokeContract" style="color:#FA3534;border-color:#FA3534">撤回合约</button>
+      <view style="width:24rpx"></view>
+      <button class="btn-primary flex-1" open-type="share">转发给签署方</button>
+    </view>
+    <!-- 非发起方：pending 状态且有待签署方 → 仅签署 -->
+    <view class="flex" wx:if="{{contract.status === 'pending' && !isInitiator && hasPendingSigner}}">
+      <button class="btn-primary flex-1" bindtap="goSign">立即签署</button>
+    </view>
+    <!-- 草稿 -->
+    <view class="flex" wx:if="{{contract.status === 'draft'}}">
+      <button class="btn-outline flex-1" bindtap="editContract">编辑合约</button>
+      <view style="width:24rpx"></view>
+      <button class="btn-primary flex-1" bindtap="sendContract">发起签约</button>
+    </view>
+    <!-- 发起方：signing 状态 → 撤回 + 转发 -->
+    <view class="flex" wx:if="{{contract.status === 'signing' && isInitiator}}">
+      <button class="btn-outline flex-1" bindtap="revokeContract" style="color:#FA3534;border-color:#FA3534">撤回合约</button>
+      <view style="width:24rpx"></view>
+      <button class="btn-primary flex-1" open-type="share">转发给签署方</button>
+    </view>
+    <!-- 非发起方：signing 状态且有待签署方 → 仅签署 -->
+    <view class="flex" wx:if="{{contract.status === 'signing' && !isInitiator && hasPendingSigner}}">
+      <button class="btn-primary flex-1" bindtap="goSign">立即签署</button>
+    </view>
+    <!-- 撤回后 -->
+    <view class="flex" wx:if="{{contract.status === 'revoked' && isInitiator}}">
+      <button class="btn-outline flex-1" bindtap="editContract">修改合约</button>
+      <view style="width:24rpx"></view>
+      <button class="btn-primary flex-1" bindtap="resendContract">重新发起</button>
+    </view>
+    <view class="flex" wx:if="{{contract.status === 'completed'}}">
+      <button class="btn-primary flex-1" bindtap="downloadPDF">下载签署文件</button>
+    </view>
+  </view>
+</view>

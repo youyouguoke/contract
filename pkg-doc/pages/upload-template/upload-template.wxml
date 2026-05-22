@@ -1,0 +1,90 @@
+<view class="page-upload">
+  <!-- 未选择文件时：上传区域 -->
+  <view class="upload-zone card" wx:if="{{!fileInfo.name}}" bindtap="chooseFile">
+    <view class="upload-icon-wrap">
+      <text class="upload-icon">📤</text>
+    </view>
+    <text class="upload-title">点击上传文档</text>
+    <text class="upload-desc">支持 .pdf .doc .docx 格式，单文件不超过20MB</text>
+  </view>
+
+  <!-- 已选择文件：文件信息 -->
+  <view class="file-card card" wx:if="{{fileInfo.name}}">
+    <view class="flex items-center">
+      <view class="file-type-icon {{fileInfo.type === 'pdf' ? 'pdf' : 'word'}}">
+        <text>{{fileInfo.type === 'pdf' ? 'PDF' : 'DOC'}}</text>
+      </view>
+      <view class="file-meta flex-1">
+        <text class="file-name">{{fileInfo.name}}</text>
+        <text class="file-size">{{fileSizeText}}</text>
+      </view>
+      <view class="file-remove" bindtap="removeFile" wx:if="{{uploadStatus === 'idle'}}">✕</view>
+    </view>
+
+    <!-- 上传进度 -->
+    <view class="progress-section" wx:if="{{uploadStatus === 'uploading' || uploadStatus === 'done'}}">
+      <view class="progress-bar">
+        <view class="progress-fill" style="width:{{uploadProgress}}%"></view>
+      </view>
+      <text class="progress-text">{{uploadStatus === 'done' ? '上传完成' : uploadProgress + '%'}}</text>
+    </view>
+
+    <!-- 上传失败 -->
+    <view class="error-section" wx:if="{{uploadStatus === 'error'}}">
+      <text class="error-text">上传失败，请重试</text>
+    </view>
+  </view>
+
+  <!-- 模板名称 -->
+  <view class="card" wx:if="{{fileInfo.name}}">
+    <view class="field-title">模板名称</view>
+    <input class="field-input" placeholder="请输入模板名称" value="{{templateName}}" bindinput="onNameInput" />
+  </view>
+
+  <!-- 文档解析状态（PDF 和 DOCX 都走自动解析） -->
+  <view class="card convert-section" wx:if="{{!isOldDoc && (convertStatus === 'converting' || convertStatus === 'done' || convertStatus === 'error')}}">
+    <view class="field-title">文档解析</view>
+    <view class="convert-loading flex items-center" wx:if="{{convertStatus === 'converting'}}">
+      <view class="convert-spinner"></view>
+      <text class="convert-text">{{isPdf ? '正在解析并渲染文档页面，请稍候...' : '正在解析文档页数，请稍候...'}}</text>
+    </view>
+    <view class="convert-result flex items-center" wx:if="{{convertStatus === 'done'}}">
+      <text class="convert-icon-ok">✅</text>
+      <text class="convert-text">解析完成，共 {{pageCount}} 页</text>
+    </view>
+    <view class="convert-error" wx:if="{{convertStatus === 'error'}}">
+      <view class="flex items-center">
+        <text class="convert-icon-err">❌</text>
+        <text class="convert-text error">解析失败</text>
+      </view>
+      <view class="retry-btn" bindtap="retryConvert">重新解析</view>
+    </view>
+  </view>
+
+  <!-- .doc 老格式：手动设置页数 -->
+  <view class="card" wx:if="{{isOldDoc && uploadStatus === 'done'}}">
+    <view class="field-title">文档页数</view>
+    <view class="page-count-row flex items-center justify-center">
+      <view class="count-btn" bindtap="decreasePages">-</view>
+      <text class="count-num">{{manualPageCount}}</text>
+      <view class="count-btn" bindtap="increasePages">+</view>
+    </view>
+    <text class="count-hint">.doc 格式请手动设置页数</text>
+  </view>
+
+  <!-- 底部操作 -->
+  <view class="bottom-bar safe-bottom" wx:if="{{fileInfo.name}}">
+    <!-- 解析完成 or .doc 已上传 -->
+    <button class="btn-primary" wx:if="{{convertStatus === 'done' || (isOldDoc && uploadStatus === 'done')}}" bindtap="startProcess">
+      开始标注签署位置
+    </button>
+    <!-- 正在处理中 -->
+    <button class="btn-primary disabled" wx:elif="{{uploadStatus === 'uploading' || convertStatus === 'converting'}}">
+      {{uploadStatus === 'uploading' ? '上传中...' : '解析中...'}}
+    </button>
+    <!-- 初始状态 or 出错后 -->
+    <button class="btn-primary" wx:else bindtap="startProcess">
+      上传文档
+    </button>
+  </view>
+</view>

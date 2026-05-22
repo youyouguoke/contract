@@ -1,0 +1,208 @@
+<view class="page-create">
+  <!-- 模板信息 -->
+  <view class="card template-info-card">
+    <view class="flex items-center">
+      <text class="tpl-icon">{{template.icon}}</text>
+      <view class="flex flex-col flex-1">
+        <text class="tpl-name">{{template.name}}</text>
+        <text class="tpl-desc">{{template.description}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 发起方角色选择 -->
+  <view class="section-card card">
+    <view class="field-title">我的角色</view>
+    <view class="role-switch flex items-center">
+      <view class="role-option {{myRole === 0 ? 'active' : ''}}" bindtap="switchRole" wx:if="{{myRole !== 0}}">
+        <text>{{signerRoles[0].label}}</text>
+      </view>
+      <view class="role-current flex items-center">
+        <view class="role-dot" style="background:{{signerRoles[myRole].color}};"></view>
+        <text class="role-current-label">我是{{myRoleLabel}}</text>
+      </view>
+      <view class="role-option {{myRole === 1 ? 'active' : ''}}" bindtap="switchRole" wx:if="{{myRole !== 1}}">
+        <text>切换为{{signerRoles[1].label}}</text>
+      </view>
+    </view>
+    <view class="role-hint">签署方将自动标记为{{otherRoleLabel}}</view>
+  </view>
+
+  <!-- 己方签署信息 -->
+  <view class="section-card card">
+    <view class="field-title">{{myRoleLabel}}签署信息</view>
+
+    <!-- 发起方姓名 -->
+    <view class="credential-row flex items-center">
+      <text class="credential-label">姓名/单位</text>
+      <input class="credential-name-input flex-1" placeholder="必填，用于合约中显示" value="{{initiatorName}}" bindinput="onInitiatorNameInput" />
+    </view>
+
+    <!-- 签名选择 -->
+    <view class="credential-row flex items-center" bindtap="pickSignature">
+      <text class="credential-label">手写签名</text>
+      <view class="credential-value flex-1 flex items-center" wx:if="{{selectedSignature}}">
+        <image class="sig-thumb" src="{{selectedSignature.image}}" mode="aspectFit" />
+        <text class="credential-sig-name">{{selectedSignature.name}}</text>
+        <text class="credential-change">更换</text>
+      </view>
+      <view class="credential-value flex-1 placeholder" wx:else>
+        <text>点击选择签名</text>
+      </view>
+      <text class="credential-arrow">›</text>
+    </view>
+
+    <!-- 印章选择 -->
+    <view class="credential-row flex items-center" bindtap="pickStamp">
+      <text class="credential-label">公章/印章</text>
+      <view class="credential-value flex-1 flex items-center" wx:if="{{selectedStamp}}">
+        <image class="stamp-thumb-img" src="{{selectedStamp.image}}" mode="aspectFit" wx:if="{{selectedStamp.image}}" />
+        <view class="stamp-thumb-ring" wx:else>
+          <text class="stamp-thumb-text">{{selectedStamp.companyName}}</text>
+        </view>
+        <text class="credential-change">更换</text>
+      </view>
+      <view class="credential-value flex-1 placeholder" wx:else>
+        <text>点击选择印章</text>
+      </view>
+      <text class="credential-arrow">›</text>
+    </view>
+
+    <view class="credential-hint">您的签名/印章将自动填入文档中所有{{myRoleLabel}}标注位置</view>
+  </view>
+
+  <!-- 文档模板：文档信息摘要 -->
+  <block wx:if="{{isDocumentTemplate}}">
+    <view class="section-card card">
+      <view class="field-title">文档信息</view>
+      <view class="doc-info-row flex">
+        <text class="doc-info-label">文件名</text>
+        <text class="doc-info-value flex-1">{{template.fileName}}</text>
+      </view>
+      <view class="doc-info-row flex">
+        <text class="doc-info-label">页数</text>
+        <text class="doc-info-value flex-1">{{template.pageCount}} 页</text>
+      </view>
+      <view class="doc-info-row flex">
+        <text class="doc-info-label">签名位</text>
+        <text class="doc-info-value flex-1">{{markersSummary.signature}} 处</text>
+      </view>
+      <view class="doc-info-row flex">
+        <text class="doc-info-label">盖章位</text>
+        <text class="doc-info-value flex-1">{{markersSummary.stamp}} 处</text>
+      </view>
+      <view class="doc-info-row flex">
+        <text class="doc-info-label">日期位</text>
+        <text class="doc-info-value flex-1">{{markersSummary.date}} 处</text>
+      </view>
+      <view class="edit-markers-btn" bindtap="editMarkers">编辑标注位置 ›</view>
+    </view>
+  </block>
+
+  <!-- 合约标题 -->
+  <view class="section-card card">
+    <view class="field-title">合约标题</view>
+    <input class="field-input" placeholder="请输入合约标题" value="{{formData.title}}" bindinput="onTitleInput" />
+  </view>
+
+  <!-- 标签 -->
+  <view class="section-card card">
+    <view class="field-title">标签</view>
+    <view class="tag-select flex flex-wrap">
+      <view
+        wx:for="{{availableTags}}"
+        wx:key="name"
+        class="tag-option {{selectedTagMap[item.name] ? 'selected' : ''}}"
+        style="{{selectedTagMap[item.name] ? 'color:' + item.color + ';background:' + item.bg + ';border-color:' + item.color : ''}}"
+        bindtap="onTagToggle"
+        data-name="{{item.name}}"
+      >
+        {{item.name}}
+      </view>
+    </view>
+
+    <view class="custom-tag-row flex items-center mt-16">
+      <input class="custom-tag-input flex-1" placeholder="输入自定义标签" value="{{customTagInput}}" bindinput="onCustomTagInput" bindconfirm="addCustomTag" />
+      <view class="custom-tag-add" bindtap="addCustomTag">+ 添加</view>
+    </view>
+  </view>
+
+  <!-- 合约字段（仅字段模板） -->
+  <view class="section-card card" wx:if="{{!isDocumentTemplate}}">
+    <view class="field-title">合约信息</view>
+    <view class="field-group" wx:for="{{template.fields}}" wx:key="*this">
+      <text class="field-label">{{item}}</text>
+      <textarea wx:if="{{item === '合约内容'}}" class="field-textarea" placeholder="请输入{{item}}" data-field="{{item}}" bindinput="onFieldInput" value="{{formData.fields[item]}}" auto-height maxlength="-1" />
+      <input wx:else class="field-input" placeholder="请输入{{item}}" data-field="{{item}}" bindinput="onFieldInput" value="{{formData.fields[item]}}" />
+    </view>
+  </view>
+
+  <!-- 签署方（对方） -->
+  <view class="section-card card">
+    <view class="flex items-center justify-between mb-24">
+      <view class="field-title" style="margin-bottom:0">
+        {{otherRoleLabel}}签署方
+        <text class="role-tag" style="background:{{signerRoles[myRole === 0 ? 1 : 0].bg}};color:{{signerRoles[myRole === 0 ? 1 : 0].color}};">{{otherRoleLabel}}</text>
+      </view>
+      <view class="add-btn primary-color" bindtap="addSigner">+ 添加</view>
+    </view>
+
+    <view wx:if="{{formData.signers.length === 0}}" class="empty-tip">请添加至少一个{{otherRoleLabel}}签署方</view>
+
+    <view class="signer-item" wx:for="{{formData.signers}}" wx:key="index">
+      <view class="flex items-center justify-between mb-16">
+        <text class="signer-index-label">签署方 {{index + 1}}</text>
+        <view class="signer-del" bindtap="removeSigner" data-index="{{index}}">✕</view>
+      </view>
+
+      <!-- 填写方式切换 -->
+      <view class="fill-mode-switch flex mb-16">
+        <view class="fill-mode-option {{item.fillMode !== 'signer' ? 'active' : ''}}" bindtap="switchFillMode" data-index="{{index}}" data-mode="initiator">我来填写</view>
+        <view class="fill-mode-option {{item.fillMode === 'signer' ? 'active' : ''}}" bindtap="switchFillMode" data-index="{{index}}" data-mode="signer">对方填写</view>
+      </view>
+
+      <!-- 我来填写模式 -->
+      <view wx:if="{{item.fillMode !== 'signer'}}">
+        <view class="signer-row flex items-center">
+          <text class="signer-label">姓名</text>
+          <input class="signer-input" placeholder="{{otherRoleLabel}}姓名/单位" data-index="{{index}}" data-field="name" bindinput="onSignerInput" value="{{item.name}}" />
+        </view>
+        <view class="signer-row flex items-center">
+          <text class="signer-label">手机号</text>
+          <input class="signer-input" placeholder="签署方手机号" type="number" maxlength="11" data-index="{{index}}" data-field="phone" bindinput="onSignerInput" value="{{item.phone}}" />
+        </view>
+        <view class="signer-row flex items-center">
+          <text class="signer-label">证件类型</text>
+          <picker class="signer-input" mode="selector" range="{{idTypeOptions}}" data-index="{{index}}" bindchange="onIdTypePick" value="{{item.idTypeIndex || 0}}">
+            <view class="picker-text {{item.idType ? '' : 'placeholder'}}">{{item.idType || '选填'}}</view>
+          </picker>
+        </view>
+        <view class="signer-row flex items-center" wx:if="{{item.idType}}">
+          <text class="signer-label">证件号码</text>
+          <input class="signer-input" placeholder="选填" data-index="{{index}}" data-field="idNumber" bindinput="onSignerInput" value="{{item.idNumber}}" />
+        </view>
+      </view>
+
+      <!-- 对方填写模式 -->
+      <view wx:else class="signer-self-fill-hint">
+        <text class="hint-text">转发合约后，对方在签署时填写个人信息</text>
+        <view class="copies-row flex items-center mt-16">
+          <text class="copies-label">生成份数</text>
+          <view class="copies-ctrl flex items-center">
+            <view class="copies-btn" bindtap="decreaseCopies" data-index="{{index}}">－</view>
+            <text class="copies-num">{{item.copies || 1}}</text>
+            <view class="copies-btn" bindtap="increaseCopies" data-index="{{index}}">＋</view>
+          </view>
+          <text class="copies-tip">每份可转发给不同签署方</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部操作 -->
+  <view class="bottom-bar safe-bottom flex">
+    <button class="btn-outline flex-1" bindtap="saveDraft">保存草稿</button>
+    <view style="width:24rpx"></view>
+    <button class="btn-primary flex-1" bindtap="submitContract">发起签约</button>
+  </view>
+</view>

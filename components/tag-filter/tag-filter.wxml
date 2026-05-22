@@ -1,0 +1,30 @@
+<view class="tag-filter">
+  <!-- 筛选头部：标题 + 已选计数 + 清空 -->
+  <view class="filter-header flex items-center justify-between" wx:if="{{showHeader}}">
+    <view class="flex items-center">
+      <text class="filter-title">{{title}}</text>
+      <view class="selected-count" wx:if="{{selectedList.length > 0}}">{{selectedList.length}}</view>
+    </view>
+    <text class="clear-btn" wx:if="{{selectedList.length > 0}}" bindtap="clearAll">清空</text>
+  </view>
+
+  <!-- 标签列表 -->
+  <view class="tag-list {{expanded ? 'expanded' : ''}}">
+    <view
+      wx:for="{{tags}}"
+      wx:key="*this"
+      class="tag-item {{selectedMap[item] ? 'selected' : ''}}"
+      style="{{selectedMap[item] ? 'color:' + colorMap[item].color + ';background:' + colorMap[item].bg + ';border-color:' + colorMap[item].color : ''}}"
+      bindtap="onTagTap"
+      data-tag="{{item}}"
+    >
+      {{item}}
+    </view>
+  </view>
+
+  <!-- 展开/收起（标签超过一行时） -->
+  <view class="expand-bar" wx:if="{{tags.length > 6}}" bindtap="toggleExpand">
+    <text class="expand-text">{{expanded ? '收起' : '展开更多'}}</text>
+    <text class="expand-arrow {{expanded ? 'up' : ''}}">›</text>
+  </view>
+</view>

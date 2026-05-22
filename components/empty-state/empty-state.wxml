@@ -1,0 +1,12 @@
+<view class="empty-state flex flex-col items-center justify-center">
+  <view class="empty-icon-wrap">
+    <view class="empty-doc">
+      <view class="empty-doc-fold"></view>
+      <view class="empty-doc-line"></view>
+      <view class="empty-doc-line short"></view>
+      <view class="empty-doc-line"></view>
+    </view>
+  </view>
+  <text class="empty-text">{{text || '暂无数据'}}</text>
+  <button class="btn-primary empty-btn" wx:if="{{showBtn}}" bindtap="onBtnTap">{{btnText || '去看看'}}</button>
+</view>

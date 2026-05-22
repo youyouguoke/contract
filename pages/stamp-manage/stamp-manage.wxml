@@ -1,0 +1,84 @@
+<view class="page-stamp-manage">
+  <!-- 创建入口 -->
+  <view class="card create-entry" bindtap="toggleCreator">
+    <text class="create-icon">+</text>
+    <text class="create-text">{{showCreator ? '收起' : '添加印章'}}</text>
+  </view>
+
+  <!-- 创建面板 -->
+  <view class="card creator-panel" wx:if="{{showCreator}}">
+    <!-- 上传图片 -->
+    <view class="field-group">
+      <text class="field-label">印章图片（选填，无图片自动生成印章）</text>
+      <view class="upload-area" wx:if="{{!uploadedImage}}" bindtap="uploadLocalImage">
+        <text class="upload-icon">+</text>
+        <text class="upload-text">上传印章图片</text>
+        <text class="upload-hint">支持拍照或从相册选取</text>
+      </view>
+      <view class="uploaded-preview" wx:else>
+        <image class="uploaded-img" src="{{uploadedImage}}" mode="aspectFit" />
+        <view class="remove-img" catchtap="removeImage">✕</view>
+      </view>
+    </view>
+
+    <view class="field-group">
+      <text class="field-label">单位名称（必填）</text>
+      <input class="field-input" placeholder="如：北京某某有限公司" value="{{companyName}}" bindinput="onNameInput" maxlength="16" />
+    </view>
+    <view class="field-group" wx:if="{{!uploadedImage}}">
+      <text class="field-label">印章用途（选填）</text>
+      <view class="purpose-options flex flex-wrap">
+        <view class="purpose-chip {{stampPurpose === item ? 'active' : ''}}"
+          wx:for="{{purposeList}}" wx:key="*this"
+          bindtap="onPurposeTap" data-value="{{item}}">{{item}}</view>
+      </view>
+    </view>
+    <view class="field-group" wx:if="{{!uploadedImage}}">
+      <text class="field-label">印章编号（选填）</text>
+      <input class="field-input" placeholder="如：1234567890123" value="{{stampCode}}" bindinput="onCodeInput" maxlength="20" />
+    </view>
+
+    <!-- Canvas 用于生成印章（隐藏） -->
+    <canvas type="2d" id="stampCanvas" class="stamp-canvas-hidden"></canvas>
+
+    <!-- 预览 -->
+    <view class="preview-section" wx:if="{{companyName}}">
+      <text class="preview-title">预览</text>
+      <view class="stamp-preview-wrap">
+        <block wx:if="{{uploadedImage}}">
+          <image class="stamp-preview-img" src="{{uploadedImage}}" mode="aspectFit" />
+        </block>
+        <block wx:elif="{{generatedPreview}}">
+          <image class="stamp-preview-img" src="{{generatedPreview}}" mode="aspectFit" />
+        </block>
+        <block wx:else>
+          <text class="preview-loading">输入名称后自动生成预览...</text>
+        </block>
+      </view>
+      <text class="preview-note" wx:if="{{!uploadedImage}}">未上传图片时自动生成圆形印章</text>
+    </view>
+
+    <view class="creator-btn" bindtap="generateStamp">确认保存</view>
+  </view>
+
+  <!-- 印章列表 -->
+  <view class="section-header">已保存印章（{{stamps.length}}）</view>
+
+  <view wx:if="{{stamps.length === 0}}" class="empty-tip">暂无印章，请点击上方添加</view>
+
+  <view class="stamp-list">
+    <view class="stamp-item card" wx:for="{{stamps}}" wx:key="id">
+      <view class="stamp-display" bindtap="previewStamp" data-id="{{item.id}}">
+        <image class="stamp-list-img" src="{{item.image}}" mode="aspectFit" wx:if="{{item.image}}" />
+      </view>
+      <view class="stamp-footer flex items-center">
+        <text class="stamp-default-badge" wx:if="{{item.isDefault}}">默认</text>
+        <text class="stamp-type-badge" wx:if="{{item.type === 'uploaded'}}">图片</text>
+        <text class="stamp-type-badge gen" wx:else>生成</text>
+        <text class="stamp-name flex-1">{{item.displayName || item.companyName}}</text>
+        <view class="stamp-action" bindtap="setDefault" data-id="{{item.id}}" wx:if="{{!item.isDefault}}">设为默认</view>
+        <view class="stamp-action delete" catchtap="deleteStamp" data-id="{{item.id}}">删除</view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,15 @@
+{
+  "name": "doc2images",
+  "version": "7.0.0",
+  "description": "Parse PDF/DOCX, render pages to styled preview images",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3",
+    "pdf-lib": "^1.17.1",
+    "@pdf-lib/fontkit": "^1.1.1",
+    "jszip": "^3.10.1",
+    "pdfjs-dist": "2.16.105",
+    "@resvg/resvg-wasm": "^2.6.2",
+    "opentype.js": "^1.3.4"
+  }
+}

@@ -1,0 +1,150 @@
+.page-sig-manage {
+  padding: 24rpx;
+  padding-bottom: 60rpx;
+}
+
+/* 手写区域 */
+.draw-card {
+  margin-bottom: 24rpx;
+}
+
+.draw-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.canvas-wrap {
+  position: relative;
+  border: 2rpx dashed #DCDFE6;
+  border-radius: 12rpx;
+  background: #FAFAFA;
+  overflow: hidden;
+}
+
+.sign-canvas {
+  width: 100%;
+  height: 300rpx;
+}
+
+.canvas-hint {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 28rpx;
+  color: #C0C4CC;
+  pointer-events: none;
+}
+
+/* 签名名称 */
+.sig-name-row {
+  margin-top: 16rpx;
+  gap: 12rpx;
+}
+
+.sig-name-label {
+  font-size: 26rpx;
+  color: #606266;
+  white-space: nowrap;
+}
+
+.sig-name-input {
+  border: 1rpx solid #DCDFE6;
+  border-radius: 8rpx;
+  padding: 12rpx 16rpx;
+  font-size: 26rpx;
+  background: #FAFAFA;
+}
+
+.draw-actions {
+  margin-top: 20rpx;
+  gap: 20rpx;
+}
+
+.draw-btn {
+  flex: 1;
+  text-align: center;
+  padding: 16rpx 0;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+}
+
+.draw-btn.clear {
+  background: #F5F6FA;
+  color: #606266;
+}
+
+.draw-btn.save {
+  background: #4F7CFF;
+  color: #fff;
+}
+
+/* 已保存列表 */
+.section-header {
+  font-size: 26rpx;
+  color: #909399;
+  margin-bottom: 16rpx;
+}
+
+.empty-tip {
+  text-align: center;
+  color: #C0C4CC;
+  font-size: 26rpx;
+  padding: 60rpx 0;
+}
+
+.sig-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.sig-item {
+  padding: 20rpx;
+}
+
+.sig-preview {
+  background: #FAFAFA;
+  border-radius: 8rpx;
+  padding: 16rpx;
+  display: flex;
+  justify-content: center;
+}
+
+.sig-image {
+  width: 400rpx;
+  height: 150rpx;
+}
+
+.sig-footer {
+  margin-top: 16rpx;
+  gap: 12rpx;
+}
+
+.sig-default-badge {
+  font-size: 22rpx;
+  color: #4F7CFF;
+  background: #ECF2FF;
+  padding: 4rpx 12rpx;
+  border-radius: 6rpx;
+  font-weight: 500;
+}
+
+.sig-name-text {
+  font-size: 26rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.sig-action {
+  font-size: 26rpx;
+  color: #4F7CFF;
+  padding: 8rpx 16rpx;
+}
+
+.sig-action.delete {
+  color: #FA3534;
+}

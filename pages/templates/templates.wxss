@@ -1,0 +1,284 @@
+.page-templates {
+  padding-bottom: 40rpx;
+}
+
+.search-bar {
+  padding: 16rpx 24rpx;
+  background: #FFFFFF;
+}
+
+.search-input-wrap {
+  background: #F5F6FA;
+  border-radius: 12rpx;
+  padding: 0 24rpx;
+  height: 72rpx;
+}
+
+.search-icon {
+  font-size: 28rpx;
+  margin-right: 12rpx;
+}
+
+.search-input {
+  flex: 1;
+  font-size: 28rpx;
+  height: 72rpx;
+}
+
+.category-bar {
+  background: #FFFFFF;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #EBEEF5;
+  white-space: nowrap;
+}
+
+.category-inner {
+  padding: 0 24rpx;
+}
+
+.category-tag {
+  display: inline-block;
+  font-size: 26rpx;
+  color: #606266;
+  background: #F5F6FA;
+  padding: 12rpx 28rpx;
+  border-radius: 32rpx;
+  margin-right: 16rpx;
+}
+
+.category-tag.active {
+  color: #4F7CFF;
+  background: #ECF2FF;
+  font-weight: 500;
+}
+
+/* 操作入口 */
+.entry-row {
+  gap: 16rpx;
+  margin-top: 0;
+}
+
+.entry-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10rpx;
+  padding: 24rpx 0;
+  border: 2rpx dashed #4F7CFF;
+  background: #ECF2FF;
+}
+
+.entry-card.upload {
+  border-color: #E6A23C;
+  background: #FFFBF0;
+}
+
+.entry-icon {
+  font-size: 32rpx;
+}
+
+.entry-text {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+/* 自建模板面板 */
+.creator-panel {
+  margin-top: 0;
+}
+
+.creator-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.creator-close {
+  font-size: 32rpx;
+  color: #C0C4CC;
+  padding: 8rpx;
+}
+
+.creator-field {
+  margin-bottom: 24rpx;
+}
+
+.creator-label {
+  font-size: 26rpx;
+  color: #606266;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.creator-input {
+  border: 1rpx solid #DCDFE6;
+  border-radius: 8rpx;
+  padding: 14rpx 16rpx;
+  font-size: 28rpx;
+  background: #FAFAFA;
+}
+
+/* 分类选择 */
+.cat-options {
+  gap: 12rpx;
+  margin-bottom: 12rpx;
+}
+
+.cat-chip {
+  font-size: 24rpx;
+  color: #606266;
+  background: #F5F6FA;
+  padding: 10rpx 20rpx;
+  border-radius: 8rpx;
+  border: 1rpx solid transparent;
+}
+
+.cat-chip.active {
+  color: #4F7CFF;
+  background: #ECF2FF;
+  border-color: #4F7CFF;
+  font-weight: 500;
+}
+
+.cat-chip.new {
+  color: #4F7CFF;
+  border: 1rpx dashed #4F7CFF;
+  background: transparent;
+}
+
+.new-cat-row {
+  gap: 12rpx;
+  margin-top: 8rpx;
+}
+
+.new-cat-ok {
+  font-size: 26rpx;
+  color: #4F7CFF;
+  font-weight: 500;
+  padding: 10rpx 16rpx;
+}
+
+/* 字段管理 */
+.field-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  margin-bottom: 12rpx;
+}
+
+.field-chip {
+  background: #ECF2FF;
+  border-radius: 8rpx;
+  padding: 8rpx 12rpx;
+  gap: 8rpx;
+}
+
+.field-chip-text {
+  font-size: 24rpx;
+  color: #4F7CFF;
+}
+
+.field-chip-del {
+  font-size: 20rpx;
+  color: #C0C4CC;
+}
+
+.field-tip {
+  font-size: 22rpx;
+  color: #C0C4CC;
+  margin-bottom: 12rpx;
+}
+
+.new-field-row {
+  gap: 12rpx;
+}
+
+.new-field-add {
+  font-size: 26rpx;
+  color: #4F7CFF;
+  font-weight: 500;
+  white-space: nowrap;
+  padding: 10rpx 8rpx;
+}
+
+.creator-btn {
+  text-align: center;
+  background: #4F7CFF;
+  color: #fff;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  font-size: 30rpx;
+  font-weight: 500;
+}
+
+/* 模板列表 */
+.template-card {
+  padding: 28rpx 32rpx;
+}
+
+.template-icon {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 20rpx;
+  background: #F5F6FA;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40rpx;
+  margin-right: 24rpx;
+}
+
+.template-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.template-name {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.template-category {
+  font-size: 24rpx;
+  color: #909399;
+  margin-top: 4rpx;
+}
+
+.template-arrow {
+  font-size: 36rpx;
+  color: #C0C4CC;
+}
+
+.template-del {
+  font-size: 28rpx;
+  padding: 8rpx 12rpx;
+  margin-right: 8rpx;
+}
+
+.template-desc {
+  display: block;
+  font-size: 26rpx;
+  color: #909399;
+  margin-top: 16rpx;
+  line-height: 1.5;
+}
+
+/* 徽章 */
+.tpl-type-badge {
+  font-size: 18rpx;
+  color: #FFFFFF;
+  border-radius: 6rpx;
+  padding: 2rpx 10rpx;
+  margin-left: 10rpx;
+  flex-shrink: 0;
+}
+
+.tpl-type-badge.doc {
+  background: #4F7CFF;
+}
+
+.tpl-type-badge.custom {
+  background: #19BE6B;
+}

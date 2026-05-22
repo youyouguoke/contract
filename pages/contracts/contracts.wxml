@@ -1,0 +1,90 @@
+<view class="page-contracts">
+  <!-- 搜索栏 -->
+  <view class="search-bar flex items-center">
+    <view class="search-input-wrap flex items-center flex-1">
+      <text class="search-icon">🔍</text>
+      <input class="search-input" placeholder="搜索合约名称、签署方、模板..." bindinput="onSearchInput" value="{{keyword}}" confirm-type="search" />
+      <text class="search-clear" wx:if="{{keyword}}" bindtap="clearSearch">✕</text>
+    </view>
+    <view class="filter-toggle {{showFilterPanel ? 'active' : ''}}" bindtap="toggleFilterPanel">
+      <text class="filter-toggle-icon">☰</text>
+      <view class="filter-badge" wx:if="{{activeFilterCount > 0}}">{{activeFilterCount}}</view>
+    </view>
+  </view>
+
+  <!-- 状态筛选（始终可见） -->
+  <scroll-view class="filter-bar" scroll-x="true" enhanced="true" show-scrollbar="{{false}}">
+    <view class="filter-inner flex">
+      <view
+        wx:for="{{filters}}"
+        wx:key="value"
+        class="filter-tag {{currentFilter === item.value ? 'active' : ''}}"
+        bindtap="onFilterTap"
+        data-value="{{item.value}}"
+      >
+        {{item.label}}
+        <text class="filter-count" wx:if="{{item.count > 0}}">{{item.count}}</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 高级筛选面板 -->
+  <view class="filter-panel {{showFilterPanel ? 'show' : ''}}">
+    <view class="filter-panel-inner">
+      <!-- 标签筛选 -->
+      <view class="panel-section">
+        <tag-filter
+          title="标签"
+          tags="{{allTags}}"
+          selectedList="{{selectedTags}}"
+          showHeader="{{true}}"
+          bind:change="onTagFilterChange"
+        />
+      </view>
+
+      <!-- 面板底部操作 -->
+      <view class="panel-actions flex">
+        <button class="panel-btn reset" bindtap="resetFilters">重置</button>
+        <button class="panel-btn confirm" bindtap="confirmFilters">确认筛选</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 遮罩 -->
+  <view class="filter-mask {{showFilterPanel ? 'show' : ''}}" bindtap="toggleFilterPanel"></view>
+
+  <!-- 已选筛选条件展示 -->
+  <view class="active-filters" wx:if="{{activeFilterCount > 0}}">
+    <scroll-view scroll-x="true" enhanced="true" show-scrollbar="{{false}}" class="active-filter-scroll">
+      <view class="active-filter-inner flex">
+        <view class="active-tag" wx:for="{{selectedTags}}" wx:key="*this" bindtap="removeTag" data-tag="{{item}}">
+          <text>{{item}}</text>
+          <text class="active-tag-close">✕</text>
+        </view>
+        <text class="clear-all-btn" bindtap="resetFilters">清空全部</text>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 结果统计 -->
+  <view class="result-bar flex items-center justify-between">
+    <text class="result-count">共 {{filteredContracts.length}} 份合约</text>
+    <view class="sort-btn flex items-center" bindtap="toggleSort">
+      <text class="sort-text">{{sortLabel}}</text>
+      <text class="sort-arrow">↕</text>
+    </view>
+  </view>
+
+  <!-- 合约列表 -->
+  <view class="contract-list container">
+    <block wx:if="{{filteredContracts.length > 0}}">
+      <contract-card
+        wx:for="{{filteredContracts}}"
+        wx:key="id"
+        contract="{{item}}"
+        bind:cardtap="onContractTap"
+      />
+    </block>
+    <empty-state wx:else text="{{hasAnyFilter ? '未找到匹配的合约' : '暂无合约'}}" showBtn="{{hasAnyFilter}}" btnText="清空筛选" bind:btnclick="resetFilters" />
+  </view>
+</view>

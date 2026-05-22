@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "contract-card": "../../components/contract-card/contract-card",
+    "empty-state": "../../components/empty-state/empty-state"
+  },
+  "navigationBarTitleText": "秒签",
+  "enableShareTimeline": true,
+  "enableShareAppMessage": true
+}

@@ -1,0 +1,333 @@
+.page-sign {
+  padding: 24rpx;
+  padding-bottom: 200rpx;
+}
+
+.contract-summary {
+  text-align: center;
+}
+
+.summary-title {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #333;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.summary-desc {
+  font-size: 26rpx;
+  color: #909399;
+}
+
+/* 合约内容字段 */
+.field-row {
+  padding: 12rpx 0;
+  border-bottom: 1rpx solid #F5F6FA;
+}
+
+.field-row:last-child {
+  border-bottom: none;
+}
+
+.field-label {
+  font-size: 26rpx;
+  color: #909399;
+  display: block;
+  margin-bottom: 4rpx;
+}
+
+.field-value {
+  font-size: 28rpx;
+  color: #333;
+  display: block;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* 条款 */
+.terms-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 16rpx;
+}
+
+.terms-content {
+  max-height: 400rpx;
+  overflow-y: auto;
+  background: #FAFAFA;
+  border-radius: 8rpx;
+  padding: 20rpx;
+}
+
+.terms-text {
+  font-size: 26rpx;
+  color: #606266;
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+/* 签名方式切换 */
+.sign-mode-tabs {
+  margin-bottom: 24rpx;
+  border-bottom: 1rpx solid #F0F0F0;
+}
+
+.sign-mode-tab {
+  flex: 1;
+  text-align: center;
+  padding: 16rpx 0;
+  font-size: 28rpx;
+  color: #909399;
+  position: relative;
+}
+
+.sign-mode-tab.active {
+  color: #4F7CFF;
+  font-weight: 600;
+}
+
+.sign-mode-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 25%;
+  right: 25%;
+  height: 4rpx;
+  background: #4F7CFF;
+  border-radius: 2rpx;
+}
+
+/* 签名 */
+.sign-area {
+  margin-top: 24rpx;
+}
+
+.sign-hint {
+  font-size: 26rpx;
+  color: #909399;
+}
+
+.clear-btn {
+  font-size: 26rpx;
+  color: #FA3534;
+}
+
+.canvas-wrap {
+  position: relative;
+  border: 2rpx dashed #DCDFE6;
+  border-radius: 12rpx;
+  overflow: hidden;
+  background: #FFFFFF;
+}
+
+.sign-canvas {
+  width: 100%;
+  height: 360rpx;
+}
+
+.canvas-placeholder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 32rpx;
+  color: #DCDFE6;
+  pointer-events: none;
+}
+
+/* 选择已有签名 */
+.sig-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+
+.sig-item {
+  width: calc(50% - 10rpx);
+  border: 2rpx solid #EBEEF5;
+  border-radius: 12rpx;
+  padding: 16rpx;
+  text-align: center;
+  position: relative;
+  background: #FAFAFA;
+  box-sizing: border-box;
+}
+
+.sig-item.selected {
+  border-color: #4F7CFF;
+  background: #ECF2FF;
+}
+
+.sig-image {
+  width: 100%;
+  height: 160rpx;
+}
+
+.sig-name {
+  display: block;
+  font-size: 24rpx;
+  color: #666;
+  margin-top: 8rpx;
+}
+
+.sig-check {
+  position: absolute;
+  top: 8rpx;
+  right: 8rpx;
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  background: #4F7CFF;
+  color: #FFF;
+  font-size: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sig-empty {
+  text-align: center;
+  padding: 48rpx 0;
+}
+
+.sig-empty-text {
+  font-size: 28rpx;
+  color: #C0C4CC;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.sig-empty-hint {
+  font-size: 24rpx;
+  color: #DCDFE6;
+}
+
+/* 印章选择 */
+.stamp-list {
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+
+.stamp-item {
+  width: calc(33.33% - 14rpx);
+  border: 2rpx solid #EBEEF5;
+  border-radius: 12rpx;
+  padding: 16rpx;
+  text-align: center;
+  position: relative;
+  background: #FAFAFA;
+  box-sizing: border-box;
+}
+
+.stamp-item.selected {
+  border-color: #FA3534;
+  background: #FFF1F0;
+}
+
+.stamp-image {
+  width: 100%;
+  height: 120rpx;
+}
+
+.stamp-name {
+  display: block;
+  font-size: 22rpx;
+  color: #666;
+  margin-top: 6rpx;
+}
+
+.stamp-check {
+  position: absolute;
+  top: 8rpx;
+  right: 8rpx;
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 50%;
+  background: #FA3534;
+  color: #FFF;
+  font-size: 22rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 同意 */
+.agree-section {
+  padding: 24rpx 0;
+}
+
+.checkbox {
+  width: 40rpx;
+  height: 40rpx;
+  border: 2rpx solid #DCDFE6;
+  border-radius: 8rpx;
+  margin-right: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  color: #FFFFFF;
+}
+
+.checkbox.checked {
+  background: #4F7CFF;
+  border-color: #4F7CFF;
+}
+
+.agree-text {
+  font-size: 26rpx;
+  color: #606266;
+}
+
+/* 底部 */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #FFFFFF;
+  padding: 16rpx 32rpx;
+  box-shadow: 0 -2rpx 12rpx rgba(0, 0, 0, 0.06);
+  z-index: 100;
+}
+
+.disabled {
+  opacity: 0.5;
+}
+
+/* 签署方信息表单 */
+.signer-info-form {
+  margin-top: 24rpx;
+}
+
+.info-form-row {
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #F5F6FA;
+}
+
+.info-form-row:last-child {
+  border-bottom: none;
+}
+
+.info-form-label {
+  font-size: 28rpx;
+  color: #909399;
+  width: 140rpx;
+}
+
+.info-form-input {
+  flex: 1;
+  font-size: 28rpx;
+  padding: 8rpx 0;
+  color: #333;
+}
+
+.info-form-input.picker-text {
+  color: #333;
+}
+
+.info-form-input.picker-text.placeholder {
+  color: #C0C4CC;
+}

@@ -1,0 +1,113 @@
+.page-index {
+  padding-bottom: 120rpx;
+}
+
+/* 顶部区域 */
+.header-section {
+  position: relative;
+}
+
+.header-bg {
+  background: linear-gradient(135deg, #4F7CFF 0%, #6E8EFF 100%);
+  padding: 60rpx 32rpx 100rpx;
+  border-radius: 0 0 40rpx 40rpx;
+}
+
+.header-content {
+  color: #FFFFFF;
+}
+
+.greeting-text {
+  font-size: 30rpx;
+  opacity: 0.9;
+}
+
+.user-name {
+  font-size: 36rpx;
+  font-weight: 600;
+}
+
+.header-desc {
+  font-size: 26rpx;
+  opacity: 0.7;
+  margin-top: 8rpx;
+  display: block;
+}
+
+/* 统计卡片 */
+.stats-card {
+  margin: -60rpx 24rpx 24rpx;
+  position: relative;
+  z-index: 1;
+}
+
+.stat-item {
+  flex: 1;
+  padding: 12rpx 0;
+}
+
+.stat-num {
+  font-size: 44rpx;
+  font-weight: 700;
+  color: #333;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: #909399;
+  margin-top: 8rpx;
+}
+
+/* 区块 */
+.section {
+  padding: 0 24rpx;
+  margin-bottom: 32rpx;
+}
+
+.section-header {
+  margin-bottom: 24rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 24rpx;
+}
+
+.section-more {
+  font-size: 26rpx;
+  margin-bottom: 24rpx;
+}
+
+/* 快捷操作 */
+.actions-grid {
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  padding: 32rpx 0 16rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+
+.action-item {
+  width: 25%;
+  margin-bottom: 16rpx;
+}
+
+.action-icon {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12rpx;
+}
+
+.icon-text {
+  font-size: 44rpx;
+}
+
+.action-label {
+  font-size: 24rpx;
+  color: #606266;
+}

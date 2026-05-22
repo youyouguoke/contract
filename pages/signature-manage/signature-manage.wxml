@@ -1,0 +1,46 @@
+<view class="page-sig-manage">
+  <!-- 手写区域 -->
+  <view class="card draw-card">
+    <view class="draw-title">手写新签名</view>
+    <view class="canvas-wrap">
+      <canvas
+        type="2d"
+        id="signCanvas"
+        class="sign-canvas"
+        bindtouchstart="onTouchStart"
+        bindtouchmove="onTouchMove"
+        bindtouchend="onTouchEnd"
+      ></canvas>
+      <text class="canvas-hint" wx:if="{{!hasDrew}}">在此手写签名</text>
+    </view>
+    <!-- 签名名称 -->
+    <view class="sig-name-row flex items-center">
+      <text class="sig-name-label">签名名称</text>
+      <input class="sig-name-input flex-1" placeholder="如：法人签名、个人签名" value="{{sigName}}" bindinput="onSigNameInput" maxlength="12" />
+    </view>
+    <view class="draw-actions flex">
+      <view class="draw-btn clear" bindtap="clearCanvas">清除</view>
+      <view class="draw-btn save" bindtap="saveSignature">保存签名</view>
+    </view>
+  </view>
+
+  <!-- 已保存签名列表 -->
+  <view class="section-header">已保存签名（{{signatures.length}}）</view>
+
+  <view wx:if="{{signatures.length === 0}}" class="empty-tip">暂未保存签名，请在上方手写后保存</view>
+
+  <view class="sig-list">
+    <view class="sig-item card" wx:for="{{signatures}}" wx:key="id">
+      <view class="sig-preview">
+        <image class="sig-image" src="{{item.image}}" mode="aspectFit" />
+      </view>
+      <view class="sig-footer flex items-center">
+        <text class="sig-default-badge" wx:if="{{item.isDefault}}">默认</text>
+        <text class="sig-name-text">{{item.name}}</text>
+        <view class="flex-1"></view>
+        <view class="sig-action" bindtap="setDefault" data-id="{{item.id}}" wx:if="{{!item.isDefault}}">设为默认</view>
+        <view class="sig-action delete" bindtap="deleteSignature" data-id="{{item.id}}">删除</view>
+      </view>
+    </view>
+  </view>
+</view>

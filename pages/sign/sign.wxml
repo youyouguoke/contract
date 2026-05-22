@@ -1,0 +1,138 @@
+<view class="page-sign">
+  <!-- 合约摘要 -->
+  <view class="card contract-summary">
+    <text class="summary-title">{{contractTitle}}</text>
+    <text class="summary-desc">请仔细阅读合约内容后进行签署</text>
+  </view>
+
+  <!-- 合约内容（非文档模板） -->
+  <view class="card" wx:if="{{contractFields.length > 0}}">
+    <view class="terms-title">合约内容</view>
+    <view class="terms-content">
+      <view class="field-row" wx:for="{{contractFields}}" wx:key="label">
+        <text class="field-label">{{item.label}}</text>
+        <text class="field-value">{{item.value || '-'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 合约条款（文档模板或无字段时显示） -->
+  <view class="card" wx:if="{{contractFields.length === 0 && contract.isDocumentTemplate}}">
+    <view class="terms-title">文档合约</view>
+    <view class="terms-content">
+      <text class="terms-text">本合约基于上传的文档模板「{{contract.templateName}}」创建，签署后签名将叠加至原始文档中。</text>
+    </view>
+  </view>
+
+  <!-- 签署方信息填写（对方填写模式） -->
+  <view class="card signer-info-form" wx:if="{{needSignerInfo}}">
+    <view class="terms-title">请填写您的信息</view>
+    <view class="info-form-row flex items-center">
+      <text class="info-form-label">姓名</text>
+      <input class="info-form-input" placeholder="请输入您的姓名" value="{{signerInfo.name}}" data-field="name" bindinput="onSignerInfoInput" />
+    </view>
+    <view class="info-form-row flex items-center">
+      <text class="info-form-label">手机号</text>
+      <input class="info-form-input" placeholder="请输入手机号" type="number" maxlength="11" value="{{signerInfo.phone}}" data-field="phone" bindinput="onSignerInfoInput" />
+    </view>
+    <view class="info-form-row flex items-center">
+      <text class="info-form-label">证件类型</text>
+      <picker mode="selector" range="{{idTypeOptions}}" bindchange="onSignerIdTypePick" value="{{signerInfo.idTypeIndex || 0}}">
+        <view class="info-form-input picker-text {{signerInfo.idType ? '' : 'placeholder'}}">{{signerInfo.idType || '选填'}}</view>
+      </picker>
+    </view>
+    <view class="info-form-row flex items-center" wx:if="{{signerInfo.idType}}">
+      <text class="info-form-label">证件号码</text>
+      <input class="info-form-input" placeholder="选填" value="{{signerInfo.idNumber}}" data-field="idNumber" bindinput="onSignerInfoInput" />
+    </view>
+  </view>
+
+  <!-- 签名区域 -->
+  <view class="card sign-area">
+    <!-- 签名方式切换 -->
+    <view class="sign-mode-tabs flex">
+      <view class="sign-mode-tab {{signMode === 'draw' ? 'active' : ''}}" bindtap="switchSignMode" data-mode="draw">
+        手写签名
+      </view>
+      <view class="sign-mode-tab {{signMode === 'select' ? 'active' : ''}}" bindtap="switchSignMode" data-mode="select">
+        选择签名{{savedSignatures.length > 0 ? '(' + savedSignatures.length + ')' : ''}}
+      </view>
+    </view>
+
+    <!-- 手写签名 -->
+    <block wx:if="{{signMode === 'draw'}}">
+      <view class="flex items-center justify-between mb-16">
+        <text class="sign-hint">请在下方区域手写签名</text>
+        <text class="clear-btn" bindtap="clearCanvas">清除重签</text>
+      </view>
+      <view class="canvas-wrap" catchtouchmove="onTouchMove">
+        <canvas
+          type="2d"
+          id="signCanvas"
+          class="sign-canvas"
+          catchtouchstart="onTouchStart"
+          catchtouchmove="onTouchMove"
+          catchtouchend="onTouchEnd"
+        ></canvas>
+        <text class="canvas-placeholder" wx:if="{{!hasSigned}}">请在此处签名</text>
+      </view>
+    </block>
+
+    <!-- 选择已有签名 -->
+    <block wx:if="{{signMode === 'select'}}">
+      <view wx:if="{{savedSignatures.length > 0}}" class="sig-list">
+        <view
+          class="sig-item {{selectedSignature && selectedSignature.id === item.id ? 'selected' : ''}}"
+          wx:for="{{savedSignatures}}"
+          wx:key="id"
+          bindtap="selectSignature"
+          data-index="{{index}}"
+        >
+          <image class="sig-image" src="{{item.image}}" mode="aspectFit" />
+          <text class="sig-name">{{item.name || '签名'}}</text>
+          <view class="sig-check" wx:if="{{selectedSignature && selectedSignature.id === item.id}}">✓</view>
+        </view>
+      </view>
+      <view wx:else class="sig-empty">
+        <text class="sig-empty-text">暂无已保存的签名</text>
+        <text class="sig-empty-hint">请切换到「手写签名」或在「我的 - 签名管理」中添加</text>
+      </view>
+    </block>
+  </view>
+
+  <!-- 印章选择（可选） -->
+  <view class="card stamp-area" wx:if="{{savedStamps.length > 0}}">
+    <view class="flex items-center justify-between mb-16">
+      <text class="sign-hint">选择印章（可选）</text>
+      <text class="clear-btn" wx:if="{{selectedStamp}}" bindtap="selectStamp" data-index="{{-1}}">取消选择</text>
+    </view>
+    <view class="stamp-list flex">
+      <view
+        class="stamp-item {{selectedStamp && selectedStamp.id === item.id ? 'selected' : ''}}"
+        wx:for="{{savedStamps}}"
+        wx:key="id"
+        bindtap="selectStamp"
+        data-index="{{index}}"
+      >
+        <image class="stamp-image" src="{{item.image}}" mode="aspectFit" />
+        <text class="stamp-name">{{item.name || '印章'}}</text>
+        <view class="stamp-check" wx:if="{{selectedStamp && selectedStamp.id === item.id}}">✓</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 同意条款 -->
+  <view class="agree-section flex items-center" bindtap="toggleAgree">
+    <view class="checkbox {{agreed ? 'checked' : ''}}">
+      <text wx:if="{{agreed}}">✓</text>
+    </view>
+    <text class="agree-text">我已阅读并同意合约全部条款</text>
+  </view>
+
+  <!-- 底部操作 -->
+  <view class="bottom-bar safe-bottom flex">
+    <button class="btn-outline flex-1" bindtap="rejectSign">拒绝签署</button>
+    <view style="width:24rpx"></view>
+    <button class="btn-primary flex-1 {{canSubmit ? '' : 'disabled'}}" bindtap="confirmSign">确认签署</button>
+  </view>
+</view>

@@ -1,0 +1,117 @@
+<view class="page-doc-preview">
+
+  <!-- 签署方图例 -->
+  <view class="signer-legend flex items-center">
+    <text class="legend-title">签署方：</text>
+    <view class="legend-item" wx:for="{{signerRoles}}" wx:key="label">
+      <view class="legend-dot" style="background:{{item.color}};"></view>
+      <text class="legend-label">{{item.label}}</text>
+    </view>
+  </view>
+
+  <!-- 渲染进度 -->
+  <view class="render-progress flex items-center justify-center" wx:if="{{renderStatus === 'rendering'}}">
+    <view class="render-spinner"></view>
+    <text class="render-text">正在渲染文档页面...</text>
+  </view>
+
+  <!-- 页码指示器 -->
+  <view class="page-indicator">
+    <text>{{currentPageIndex + 1}} / {{pages.length}}</text>
+  </view>
+
+  <!-- 文档区域 -->
+  <view class="doc-area" style="height:{{pageHeightPx}}px;">
+    <!-- 底层：文档页面背景（在 movable-area 外面） -->
+    <view class="page-bg" style="width:{{pageWidthPx}}px;height:{{pageHeightPx}}px;">
+      <block wx:if="{{currentPage.image}}">
+        <image class="page-real-image" src="{{currentPage.image}}" mode="aspectFit"
+          style="width:{{pageWidthPx}}px;height:{{pageHeightPx}}px;"
+          bindload="onImageLoad" binderror="onImageError" />
+      </block>
+      <block wx:else>
+        <view class="mock-page" style="width:{{pageWidthPx}}px;height:{{pageHeightPx}}px;">
+          <text class="mock-page-title">{{currentPage.mockLabel}}</text>
+          <view class="mock-lines">
+            <view class="mock-line" wx:for="{{mockLines}}" wx:key="index"
+              style="width:{{item}}%"></view>
+          </view>
+          <view class="mock-watermark">文档预览</view>
+        </view>
+      </block>
+    </view>
+
+    <!-- 上层：可拖拽标记层 -->
+    <movable-area class="movable-zone" style="width:{{pageWidthPx}}px;height:{{pageHeightPx}}px;">
+      <movable-view
+        wx:for="{{currentPageMarkers}}"
+        wx:key="id"
+        class="marker-mv"
+        x="{{item._x}}"
+        y="{{item._y}}"
+        direction="all"
+        bindchange="onMarkerMove"
+        data-marker-id="{{item.id}}"
+        style="width:{{item._width}}px;height:{{item._height}}px;z-index:{{selectedMarkerId === item.id ? 10 : 1}};"
+      >
+        <drag-marker
+          markerId="{{item.id}}"
+          type="{{item.type}}"
+          label="{{item.label}}"
+          selected="{{selectedMarkerId === item.id}}"
+          signerLabel="{{item.signerLabel}}"
+          signerColor="{{item.signerColor}}"
+          bind:select="onMarkerSelect"
+          bind:delete="onMarkerDelete"
+        />
+      </movable-view>
+    </movable-area>
+  </view>
+
+  <!-- 翻页按钮 -->
+  <view class="page-nav flex items-center justify-between">
+    <view class="nav-btn {{currentPageIndex <= 0 ? 'disabled' : ''}}" bindtap="prevPage">‹ 上一页</view>
+    <view class="nav-dots flex">
+      <view
+        wx:for="{{pages}}"
+        wx:key="pageIndex"
+        class="nav-dot {{currentPageIndex === index ? 'active' : ''}}"
+        bindtap="goToPage"
+        data-index="{{index}}"
+      ></view>
+    </view>
+    <view class="nav-btn {{currentPageIndex >= pages.length - 1 ? 'disabled' : ''}}" bindtap="nextPage">下一页 ›</view>
+  </view>
+
+  <!-- 当前页标记列表 -->
+  <view class="markers-summary" wx:if="{{currentPageMarkers.length > 0}}">
+    <text class="summary-title">当前页标记（{{currentPageMarkers.length}}）</text>
+    <view class="summary-list">
+      <view class="summary-item flex items-center {{selectedMarkerId === item.id ? 'active' : ''}}"
+        wx:for="{{currentPageMarkers}}" wx:key="id"
+        bindtap="onMarkerSelect" data-marker-id="{{item.id}}">
+        <view class="summary-signer-dot" style="background:{{item.signerColor}};"></view>
+        <text class="summary-icon">{{item.typeIcon}}</text>
+        <text class="summary-label flex-1">{{item.label}}</text>
+        <text class="summary-pos">{{item.xPctDisplay}}%, {{item.yPctDisplay}}%</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部工具栏 -->
+  <view class="toolbar safe-bottom">
+    <view class="toolbar-row flex">
+      <view class="tool-btn" bindtap="addMarker">
+        <text class="tool-icon">✍️</text>
+        <text class="tool-label">添加签署位</text>
+      </view>
+      <view class="tool-btn save" bindtap="saveTemplate">
+        <text class="tool-icon">💾</text>
+        <text class="tool-label">保存</text>
+      </view>
+    </view>
+    <view class="toolbar-hint">
+      点击添加 → 选择签署方 → 自动生成签字+签章+日期，可拖拽调整
+    </view>
+  </view>
+</view>

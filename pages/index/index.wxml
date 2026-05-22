@@ -1,0 +1,84 @@
+<view class="page-index">
+  <!-- 顶部欢迎区 -->
+  <view class="header-section">
+    <view class="header-bg">
+      <view class="header-content">
+        <view class="greeting">
+          <text class="greeting-text">{{greeting}}，</text>
+          <text class="user-name">{{userInfo.name || '请先登录'}}</text>
+        </view>
+        <text class="header-desc">轻松管理您的每一份合约</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 统计卡片 -->
+  <view class="stats-card card">
+    <view class="stats-row flex justify-between">
+      <view class="stat-item flex flex-col items-center" bindtap="goContracts" data-status="all">
+        <text class="stat-num">{{stats.total}}</text>
+        <text class="stat-label">全部合约</text>
+      </view>
+      <view class="stat-item flex flex-col items-center" bindtap="goContracts" data-status="pending">
+        <text class="stat-num warning-color">{{stats.pending}}</text>
+        <text class="stat-label">待签署</text>
+      </view>
+      <view class="stat-item flex flex-col items-center" bindtap="goContracts" data-status="signing">
+        <text class="stat-num primary-color">{{stats.signing}}</text>
+        <text class="stat-label">签署中</text>
+      </view>
+      <view class="stat-item flex flex-col items-center" bindtap="goContracts" data-status="completed">
+        <text class="stat-num success-color">{{stats.completed}}</text>
+        <text class="stat-label">已完成</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 快捷操作 -->
+  <view class="section">
+    <view class="section-title">快捷操作</view>
+    <view class="actions-grid flex flex-wrap">
+      <view class="action-item flex flex-col items-center" bindtap="createContract">
+        <view class="action-icon" style="background:#ECF2FF">
+          <text class="icon-text">📝</text>
+        </view>
+        <text class="action-label">发起签约</text>
+      </view>
+      <view class="action-item flex flex-col items-center" bindtap="goTemplates">
+        <view class="action-icon" style="background:#E8F8EF">
+          <text class="icon-text">📄</text>
+        </view>
+        <text class="action-label">合约模板</text>
+      </view>
+      <view class="action-item flex flex-col items-center" bindtap="goContracts" data-status="pending">
+        <view class="action-icon" style="background:#FDF6EC">
+          <text class="icon-text">⏳</text>
+        </view>
+        <text class="action-label">待我签署</text>
+      </view>
+      <view class="action-item flex flex-col items-center" bindtap="goContracts" data-status="draft">
+        <view class="action-icon" style="background:#F4F4F5">
+          <text class="icon-text">📑</text>
+        </view>
+        <text class="action-label">草稿箱</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 最近合约 -->
+  <view class="section">
+    <view class="section-header flex items-center justify-between">
+      <text class="section-title">最近合约</text>
+      <text class="section-more primary-color" bindtap="goContracts" data-status="all">查看全部 ›</text>
+    </view>
+    <block wx:if="{{recentContracts.length > 0}}">
+      <contract-card
+        wx:for="{{recentContracts}}"
+        wx:key="id"
+        contract="{{item}}"
+        bind:cardtap="onContractTap"
+      />
+    </block>
+    <empty-state wx:else text="暂无合约记录" showBtn="{{true}}" btnText="发起签约" bind:btnclick="createContract" />
+  </view>
+</view>

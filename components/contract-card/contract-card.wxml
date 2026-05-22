@@ -1,0 +1,27 @@
+<view class="contract-card" bindtap="onTap">
+  <view class="card-header flex items-center justify-between">
+    <text class="card-title text-ellipsis">{{contract.title}}</text>
+    <view class="status-badge" style="color:{{statusInfo.color}};background:{{statusInfo.bg}}">
+      {{statusInfo.text}}
+    </view>
+  </view>
+  <!-- 标签 -->
+  <view class="card-tags flex flex-wrap" wx:if="{{tagList.length > 0}}">
+    <view class="card-tag" wx:for="{{tagList}}" wx:key="name" style="color:{{item.color}};background:{{item.bg}}">{{item.name}}</view>
+  </view>
+
+  <view class="card-body">
+    <view class="info-row flex items-center">
+      <text class="label">发起方：</text>
+      <text class="value">{{contract.initiator.name}}</text>
+    </view>
+    <view class="info-row flex items-center">
+      <text class="label">签署方：</text>
+      <text class="value">{{signersText}}</text>
+    </view>
+  </view>
+  <view class="card-footer flex items-center justify-between">
+    <text class="time">{{timeText}}</text>
+    <text class="action primary-color">查看详情 ›</text>
+  </view>
+</view>
